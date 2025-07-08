@@ -43,8 +43,7 @@ const About = () => {
       x: 0,
       opacity: 1,
       transition: {
-        duration: 0.6,
-        ease: "easeOut"
+        duration: 0.6
       }
     }
   };
@@ -55,8 +54,7 @@ const About = () => {
       scale: 1,
       opacity: 1,
       transition: {
-        duration: 0.5,
-        ease: "easeOut"
+        duration: 0.5
       }
     }
   };
