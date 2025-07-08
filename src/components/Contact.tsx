@@ -9,24 +9,28 @@ const Contact = () => {
     {
       icon: MapPin,
       title: "Visit Our Showroom",
+      amharic: "የምርት ማሳያ ቦታችንን ይጎብኙ",
       details: "Bole Road, Addis Ababa, Ethiopia",
-      subtitle: "Come see our furniture collection in person"
+      subtitle: "Come see our Ethiopian furniture collection in person"
     },
     {
       icon: Phone,
       title: "Call Us",
+      amharic: "ይደውሉልን",
       details: "+251 11 123 4567",
       subtitle: "Monday to Saturday, 9AM - 6PM"
     },
     {
       icon: Mail,
       title: "Email Us",
+      amharic: "ኢሜል ላኩልን",
       details: "info@addisfurniture.com",
       subtitle: "We'll respond within 24 hours"
     },
     {
       icon: Clock,
       title: "Business Hours",
+      amharic: "የስራ ሰዓት",
       details: "Mon - Sat: 9AM - 6PM",
       subtitle: "Sunday: 10AM - 4PM"
     }
@@ -50,7 +54,7 @@ const Contact = () => {
       opacity: 1,
       transition: {
         duration: 0.6,
-        ease: "easeOut"
+        ease: [0.6, -0.05, 0.01, 0.99]
       }
     }
   };
@@ -62,21 +66,29 @@ const Contact = () => {
       opacity: 1,
       transition: {
         duration: 0.5,
-        ease: "easeOut"
+        ease: [0.6, -0.05, 0.01, 0.99]
       }
     },
     hover: {
       scale: 1.05,
       transition: {
         duration: 0.3,
-        ease: "easeInOut"
+        ease: [0.6, -0.05, 0.01, 0.99]
       }
     }
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-amber-900 to-orange-900 text-white">
-      <div className="container mx-auto px-4">
+    <section className="py-20 bg-gradient-to-br from-green-800 via-yellow-700 to-red-800 text-white relative overflow-hidden">
+      {/* Ethiopian Pattern Overlay */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="w-full h-full" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.3'%3E%3Cpath d='M40 40c0-22.091 17.909-40 40-40v40H40zM0 40c0-22.091 17.909-40 40-40v40H0z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundSize: '80px 80px'
+        }}></div>
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div 
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
@@ -85,11 +97,12 @@ const Contact = () => {
           viewport={{ once: true }}
         >
           <h2 className="text-4xl lg:text-5xl font-serif font-bold mb-4">
-            Get In Touch
+            ያግኙን
           </h2>
-          <p className="text-xl text-amber-100 max-w-2xl mx-auto">
-            Ready to transform your space? Visit our showroom or contact us 
-            to discuss your furniture needs with our design experts.
+          <p className="text-2xl lg:text-3xl text-yellow-200 mb-2">Get In Touch</p>
+          <p className="text-xl text-green-100 max-w-2xl mx-auto">
+            Ready to transform your space with authentic Ethiopian furniture? 
+            Visit our showroom or contact us to discuss your needs with our design experts.
           </p>
         </motion.div>
 
@@ -109,15 +122,16 @@ const Contact = () => {
               <Card className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all duration-300 cursor-pointer">
                 <CardContent className="p-6 text-center">
                   <motion.div 
-                    className="bg-amber-200 text-amber-800 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+                    className="bg-gradient-to-r from-green-200 via-yellow-200 to-red-200 text-green-800 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
                     whileHover={{ rotate: 360 }}
                     transition={{ duration: 0.6 }}
                   >
                     <info.icon className="h-8 w-8" />
                   </motion.div>
-                  <h3 className="text-lg font-semibold mb-2">{info.title}</h3>
-                  <p className="text-amber-100 font-medium mb-1">{info.details}</p>
-                  <p className="text-sm text-amber-200">{info.subtitle}</p>
+                  <h3 className="text-lg font-semibold mb-1 text-yellow-200">{info.amharic}</h3>
+                  <h4 className="text-sm font-medium mb-2 text-white">{info.title}</h4>
+                  <p className="text-green-100 font-medium mb-1">{info.details}</p>
+                  <p className="text-sm text-green-200">{info.subtitle}</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -125,7 +139,7 @@ const Contact = () => {
         </motion.div>
 
         <motion.div 
-          className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 max-w-4xl mx-auto"
+          className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 max-w-4xl mx-auto border-2 border-white/20"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
@@ -139,11 +153,17 @@ const Contact = () => {
               viewport={{ once: true }}
             >
               <motion.h3 
-                className="text-2xl font-serif font-bold mb-6"
+                className="text-2xl font-serif font-bold mb-2 text-yellow-200"
+                variants={itemVariants}
+              >
+                መልእክት ይላኩልን
+              </motion.h3>
+              <motion.p 
+                className="text-lg mb-6 text-white"
                 variants={itemVariants}
               >
                 Send Us a Message
-              </motion.h3>
+              </motion.p>
               <motion.form 
                 className="space-y-4"
                 variants={containerVariants}
@@ -154,31 +174,31 @@ const Contact = () => {
                 >
                   <motion.input 
                     type="text" 
-                    placeholder="Your Name"
-                    className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-amber-200 focus:outline-none focus:ring-2 focus:ring-amber-300"
+                    placeholder="Your Name / ስምዎ"
+                    className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-green-200 focus:outline-none focus:ring-2 focus:ring-yellow-400"
                     whileFocus={{ scale: 1.02 }}
                     transition={{ duration: 0.2 }}
                   />
                   <motion.input 
                     type="email" 
-                    placeholder="Your Email"
-                    className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-amber-200 focus:outline-none focus:ring-2 focus:ring-amber-300"
+                    placeholder="Your Email / ኢሜልዎ"
+                    className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-green-200 focus:outline-none focus:ring-2 focus:ring-yellow-400"
                     whileFocus={{ scale: 1.02 }}
                     transition={{ duration: 0.2 }}
                   />
                 </motion.div>
                 <motion.input 
                   type="text" 
-                  placeholder="Subject"
-                  className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-amber-200 focus:outline-none focus:ring-2 focus:ring-amber-300"
+                  placeholder="Subject / ርዕስ"
+                  className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-green-200 focus:outline-none focus:ring-2 focus:ring-yellow-400"
                   variants={itemVariants}
                   whileFocus={{ scale: 1.02 }}
                   transition={{ duration: 0.2 }}
                 />
                 <motion.textarea 
-                  placeholder="Your Message"
+                  placeholder="Your Message / መልእክትዎ"
                   rows={4}
-                  className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-amber-200 focus:outline-none focus:ring-2 focus:ring-amber-300"
+                  className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-green-200 focus:outline-none focus:ring-2 focus:ring-yellow-400"
                   variants={itemVariants}
                   whileFocus={{ scale: 1.02 }}
                   transition={{ duration: 0.2 }}
@@ -188,8 +208,8 @@ const Contact = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Button className="w-full bg-amber-600 hover:bg-amber-700 text-white py-3 rounded-lg text-lg font-semibold">
-                    Send Message
+                  <Button className="w-full bg-gradient-to-r from-yellow-500 to-red-500 hover:from-yellow-600 hover:to-red-600 text-white py-3 rounded-lg text-lg font-semibold border-2 border-white/20">
+                    Send Message / መልእክት ላክ
                   </Button>
                 </motion.div>
               </motion.form>
@@ -203,11 +223,17 @@ const Contact = () => {
               viewport={{ once: true }}
             >
               <motion.h3 
-                className="text-2xl font-serif font-bold mb-6"
+                className="text-2xl font-serif font-bold mb-2 text-yellow-200"
+                variants={itemVariants}
+              >
+                ለምን አዲስ Furniture?
+              </motion.h3>
+              <motion.p 
+                className="text-lg mb-6 text-white"
                 variants={itemVariants}
               >
                 Why Choose Addis Furniture?
-              </motion.h3>
+              </motion.p>
               <motion.ul 
                 className="space-y-4"
                 variants={containerVariants}
@@ -218,8 +244,11 @@ const Contact = () => {
                   whileHover={{ x: 10 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="w-2 h-2 bg-amber-300 rounded-full mt-2 mr-3"></div>
-                  <span className="text-amber-100">Locally crafted with Ethiopian hardwood</span>
+                  <div className="w-2 h-2 bg-yellow-300 rounded-full mt-2 mr-3"></div>
+                  <div>
+                    <span className="text-green-100 block">በኢትዮጵያ ጠንካራ እንጨት የተሠሩ</span>
+                    <span className="text-green-200 text-sm">Locally crafted with Ethiopian hardwood</span>
+                  </div>
                 </motion.li>
                 <motion.li 
                   className="flex items-start"
@@ -227,8 +256,11 @@ const Contact = () => {
                   whileHover={{ x: 10 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="w-2 h-2 bg-amber-300 rounded-full mt-2 mr-3"></div>
-                  <span className="text-amber-100">Custom designs to fit your space perfectly</span>
+                  <div className="w-2 h-2 bg-yellow-300 rounded-full mt-2 mr-3"></div>
+                  <div>
+                    <span className="text-green-100 block">ለእርስዎ የተነደፉ ልዩ ዲዛይኖች</span>
+                    <span className="text-green-200 text-sm">Custom designs to fit your space perfectly</span>
+                  </div>
                 </motion.li>
                 <motion.li 
                   className="flex items-start"
@@ -236,8 +268,11 @@ const Contact = () => {
                   whileHover={{ x: 10 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="w-2 h-2 bg-amber-300 rounded-full mt-2 mr-3"></div>
-                  <span className="text-amber-100">Competitive pricing and flexible payment options</span>
+                  <div className="w-2 h-2 bg-yellow-300 rounded-full mt-2 mr-3"></div>
+                  <div>
+                    <span className="text-green-100 block">ተመጣጣኝ ዋጋ እና የመክፈያ አማራጮች</span>
+                    <span className="text-green-200 text-sm">Competitive pricing and flexible payment options</span>
+                  </div>
                 </motion.li>
                 <motion.li 
                   className="flex items-start"
@@ -245,8 +280,11 @@ const Contact = () => {
                   whileHover={{ x: 10 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="w-2 h-2 bg-amber-300 rounded-full mt-2 mr-3"></div>
-                  <span className="text-amber-100">Professional delivery and assembly service</span>
+                  <div className="w-2 h-2 bg-yellow-300 rounded-full mt-2 mr-3"></div>
+                  <div>
+                    <span className="text-green-100 block">ሙያዊ የማስተላለፍ እና መሰብሰብ አገልግሎት</span>
+                    <span className="text-green-200 text-sm">Professional delivery and assembly service</span>
+                  </div>
                 </motion.li>
               </motion.ul>
             </motion.div>
