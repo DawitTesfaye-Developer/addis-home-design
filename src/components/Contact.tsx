@@ -54,7 +54,7 @@ const Contact = () => {
       opacity: 1,
       transition: {
         duration: 0.6,
-        ease: [0.6, -0.05, 0.01, 0.99]
+        ease: "easeOut"
       }
     }
   };
@@ -66,20 +66,20 @@ const Contact = () => {
       opacity: 1,
       transition: {
         duration: 0.5,
-        ease: [0.6, -0.05, 0.01, 0.99]
+        ease: "easeOut"
       }
     },
     hover: {
       scale: 1.05,
       transition: {
         duration: 0.3,
-        ease: [0.6, -0.05, 0.01, 0.99]
+        ease: "easeOut"
       }
     }
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-green-800 via-yellow-700 to-red-800 text-white relative overflow-hidden">
+    <section className="py-20 bg-gradient-to-br from-amber-900 via-orange-800 to-red-900 text-white relative overflow-hidden">
       {/* Ethiopian Pattern Overlay */}
       <div className="absolute inset-0 opacity-10">
         <div className="w-full h-full" style={{
@@ -99,8 +99,8 @@ const Contact = () => {
           <h2 className="text-4xl lg:text-5xl font-serif font-bold mb-4">
             ያግኙን
           </h2>
-          <p className="text-2xl lg:text-3xl text-yellow-200 mb-2">Get In Touch</p>
-          <p className="text-xl text-green-100 max-w-2xl mx-auto">
+          <p className="text-2xl lg:text-3xl text-orange-200 mb-2">Get In Touch</p>
+          <p className="text-xl text-amber-100 max-w-2xl mx-auto">
             Ready to transform your space with authentic Ethiopian furniture? 
             Visit our showroom or contact us to discuss your needs with our design experts.
           </p>
@@ -122,16 +122,16 @@ const Contact = () => {
               <Card className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all duration-300 cursor-pointer">
                 <CardContent className="p-6 text-center">
                   <motion.div 
-                    className="bg-gradient-to-r from-green-200 via-yellow-200 to-red-200 text-green-800 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+                    className="bg-gradient-to-r from-amber-200 via-orange-200 to-red-200 text-amber-900 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
                     whileHover={{ rotate: 360 }}
                     transition={{ duration: 0.6 }}
                   >
                     <info.icon className="h-8 w-8" />
                   </motion.div>
-                  <h3 className="text-lg font-semibold mb-1 text-yellow-200">{info.amharic}</h3>
+                  <h3 className="text-lg font-semibold mb-1 text-orange-200">{info.amharic}</h3>
                   <h4 className="text-sm font-medium mb-2 text-white">{info.title}</h4>
-                  <p className="text-green-100 font-medium mb-1">{info.details}</p>
-                  <p className="text-sm text-green-200">{info.subtitle}</p>
+                  <p className="text-amber-100 font-medium mb-1">{info.details}</p>
+                  <p className="text-sm text-amber-200">{info.subtitle}</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -153,7 +153,7 @@ const Contact = () => {
               viewport={{ once: true }}
             >
               <motion.h3 
-                className="text-2xl font-serif font-bold mb-2 text-yellow-200"
+                className="text-2xl font-serif font-bold mb-2 text-orange-200"
                 variants={itemVariants}
               >
                 መልእክት ይላኩልን
@@ -175,14 +175,14 @@ const Contact = () => {
                   <motion.input 
                     type="text" 
                     placeholder="Your Name / ስምዎ"
-                    className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-green-200 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                    className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-amber-200 focus:outline-none focus:ring-2 focus:ring-orange-400"
                     whileFocus={{ scale: 1.02 }}
                     transition={{ duration: 0.2 }}
                   />
                   <motion.input 
                     type="email" 
                     placeholder="Your Email / ኢሜልዎ"
-                    className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-green-200 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                    className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-amber-200 focus:outline-none focus:ring-2 focus:ring-orange-400"
                     whileFocus={{ scale: 1.02 }}
                     transition={{ duration: 0.2 }}
                   />
@@ -190,7 +190,7 @@ const Contact = () => {
                 <motion.input 
                   type="text" 
                   placeholder="Subject / ርዕስ"
-                  className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-green-200 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-amber-200 focus:outline-none focus:ring-2 focus:ring-orange-400"
                   variants={itemVariants}
                   whileFocus={{ scale: 1.02 }}
                   transition={{ duration: 0.2 }}
@@ -198,7 +198,7 @@ const Contact = () => {
                 <motion.textarea 
                   placeholder="Your Message / መልእክትዎ"
                   rows={4}
-                  className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-green-200 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-amber-200 focus:outline-none focus:ring-2 focus:ring-orange-400"
                   variants={itemVariants}
                   whileFocus={{ scale: 1.02 }}
                   transition={{ duration: 0.2 }}
@@ -208,7 +208,7 @@ const Contact = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Button className="w-full bg-gradient-to-r from-yellow-500 to-red-500 hover:from-yellow-600 hover:to-red-600 text-white py-3 rounded-lg text-lg font-semibold border-2 border-white/20">
+                  <Button className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white py-3 rounded-lg text-lg font-semibold border-2 border-white/20">
                     Send Message / መልእክት ላክ
                   </Button>
                 </motion.div>
@@ -223,7 +223,7 @@ const Contact = () => {
               viewport={{ once: true }}
             >
               <motion.h3 
-                className="text-2xl font-serif font-bold mb-2 text-yellow-200"
+                className="text-2xl font-serif font-bold mb-2 text-orange-200"
                 variants={itemVariants}
               >
                 ለምን አዲስ Furniture?
@@ -244,10 +244,10 @@ const Contact = () => {
                   whileHover={{ x: 10 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="w-2 h-2 bg-yellow-300 rounded-full mt-2 mr-3"></div>
+                  <div className="w-2 h-2 bg-orange-300 rounded-full mt-2 mr-3"></div>
                   <div>
-                    <span className="text-green-100 block">በኢትዮጵያ ጠንካራ እንጨት የተሠሩ</span>
-                    <span className="text-green-200 text-sm">Locally crafted with Ethiopian hardwood</span>
+                    <span className="text-amber-100 block">በኢትዮጵያ ጠንካራ እንጨት የተሠሩ</span>
+                    <span className="text-amber-200 text-sm">Locally crafted with Ethiopian hardwood</span>
                   </div>
                 </motion.li>
                 <motion.li 
@@ -256,10 +256,10 @@ const Contact = () => {
                   whileHover={{ x: 10 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="w-2 h-2 bg-yellow-300 rounded-full mt-2 mr-3"></div>
+                  <div className="w-2 h-2 bg-orange-300 rounded-full mt-2 mr-3"></div>
                   <div>
-                    <span className="text-green-100 block">ለእርስዎ የተነደፉ ልዩ ዲዛይኖች</span>
-                    <span className="text-green-200 text-sm">Custom designs to fit your space perfectly</span>
+                    <span className="text-amber-100 block">ለእርስዎ የተነደፉ ልዩ ዲዛይኖች</span>
+                    <span className="text-amber-200 text-sm">Custom designs to fit your space perfectly</span>
                   </div>
                 </motion.li>
                 <motion.li 
@@ -268,10 +268,10 @@ const Contact = () => {
                   whileHover={{ x: 10 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="w-2 h-2 bg-yellow-300 rounded-full mt-2 mr-3"></div>
+                  <div className="w-2 h-2 bg-orange-300 rounded-full mt-2 mr-3"></div>
                   <div>
-                    <span className="text-green-100 block">ተመጣጣኝ ዋጋ እና የመክፈያ አማራጮች</span>
-                    <span className="text-green-200 text-sm">Competitive pricing and flexible payment options</span>
+                    <span className="text-amber-100 block">ተመጣጣኝ ዋጋ እና የመክፈያ አማራጮች</span>
+                    <span className="text-amber-200 text-sm">Competitive pricing and flexible payment options</span>
                   </div>
                 </motion.li>
                 <motion.li 
@@ -280,10 +280,10 @@ const Contact = () => {
                   whileHover={{ x: 10 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="w-2 h-2 bg-yellow-300 rounded-full mt-2 mr-3"></div>
+                  <div className="w-2 h-2 bg-orange-300 rounded-full mt-2 mr-3"></div>
                   <div>
-                    <span className="text-green-100 block">ሙያዊ የማስተላለፍ እና መሰብሰብ አገልግሎት</span>
-                    <span className="text-green-200 text-sm">Professional delivery and assembly service</span>
+                    <span className="text-amber-100 block">ሙያዊ የማስተላለፍ እና መሰብሰብ አገልግሎት</span>
+                    <span className="text-amber-200 text-sm">Professional delivery and assembly service</span>
                   </div>
                 </motion.li>
               </motion.ul>

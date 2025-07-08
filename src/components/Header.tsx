@@ -17,7 +17,7 @@ const Header = () => {
       height: 0,
       transition: {
         duration: 0.3,
-        ease: [0.6, -0.05, 0.01, 0.99]
+        ease: "easeOut"
       }
     },
     visible: { 
@@ -25,7 +25,7 @@ const Header = () => {
       height: "auto",
       transition: {
         duration: 0.3,
-        ease: [0.6, -0.05, 0.01, 0.99]
+        ease: "easeOut"
       }
     }
   };
@@ -37,19 +37,19 @@ const Header = () => {
       x: 0,
       transition: {
         duration: 0.3,
-        ease: [0.6, -0.05, 0.01, 0.99]
+        ease: "easeOut"
       }
     }
   };
 
   return (
     <motion.header 
-      className="bg-white/95 backdrop-blur-sm border-b-4 border-gradient-to-r from-green-400 via-yellow-400 to-red-400 sticky top-0 z-50"
+      className="bg-white/95 backdrop-blur-sm border-b-4 border-gradient-to-r from-amber-400 via-orange-400 to-red-400 sticky top-0 z-50"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: [0.6, -0.05, 0.01, 0.99] }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
       style={{
-        borderImage: 'linear-gradient(90deg, #22c55e, #eab308, #ef4444) 1'
+        borderImage: 'linear-gradient(90deg, #f59e0b, #f97316, #ef4444) 1'
       }}
     >
       <div className="container mx-auto px-4">
@@ -61,10 +61,10 @@ const Header = () => {
             transition={{ duration: 0.3 }}
           >
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-green-500 via-yellow-500 to-red-500 rounded-full flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-br from-amber-600 via-orange-600 to-red-600 rounded-full flex items-center justify-center">
                 <span className="text-white font-bold text-sm">አ</span>
               </div>
-              <h1 className="text-2xl font-serif font-bold bg-gradient-to-r from-green-700 via-yellow-600 to-red-700 bg-clip-text text-transparent">
+              <h1 className="text-2xl font-serif font-bold bg-gradient-to-r from-amber-800 via-orange-700 to-red-800 bg-clip-text text-transparent">
                 አዲስ Furniture
               </h1>
             </div>
@@ -81,16 +81,16 @@ const Header = () => {
               <motion.a 
                 key={item.name}
                 href={`#${item.name.toLowerCase()}`} 
-                className="text-green-800 hover:text-red-600 font-medium transition-colors relative group"
+                className="text-amber-900 hover:text-red-600 font-medium transition-colors relative group"
                 whileHover={{ scale: 1.1 }}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
                 <span className="block text-sm">{item.amharic}</span>
-                <span className="block text-xs text-green-600">{item.name}</span>
+                <span className="block text-xs text-amber-700">{item.name}</span>
                 <motion.div
-                  className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-green-600 via-yellow-500 to-red-600"
+                  className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-amber-600 via-orange-500 to-red-600"
                   initial={{ scaleX: 0 }}
                   whileHover={{ scaleX: 1 }}
                   transition={{ duration: 0.3 }}
@@ -110,7 +110,7 @@ const Header = () => {
                 <Button 
                   variant="ghost" 
                   size="sm" 
-                  className="text-green-800 hover:text-red-600 hover:bg-yellow-50 relative"
+                  className="text-amber-900 hover:text-red-600 hover:bg-orange-50 relative"
                 >
                   <Icon className="h-5 w-5" />
                   {Icon === ShoppingCart && (
@@ -135,7 +135,7 @@ const Header = () => {
               <Button
                 variant="ghost"
                 size="sm"
-                className="md:hidden text-green-800 hover:text-red-600"
+                className="md:hidden text-amber-900 hover:text-red-600"
                 onClick={toggleMenu}
               >
                 <AnimatePresence mode="wait">
@@ -158,7 +158,7 @@ const Header = () => {
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div 
-              className="md:hidden overflow-hidden bg-gradient-to-r from-green-50 via-yellow-50 to-red-50"
+              className="md:hidden overflow-hidden bg-gradient-to-r from-amber-50 via-orange-50 to-red-50"
               variants={menuVariants}
               initial="hidden"
               animate="visible"
@@ -174,7 +174,7 @@ const Header = () => {
                   <motion.a 
                     key={item.name}
                     href={`#${item.name.toLowerCase()}`}
-                    className="block text-green-800 hover:text-red-600 font-medium transition-colors py-3 px-4 border-l-4 border-transparent hover:border-yellow-500"
+                    className="block text-amber-900 hover:text-red-600 font-medium transition-colors py-3 px-4 border-l-4 border-transparent hover:border-orange-500"
                     variants={itemVariants}
                     initial="hidden"
                     animate="visible"
@@ -183,7 +183,7 @@ const Header = () => {
                     whileHover={{ x: 10 }}
                   >
                     <span className="block text-base">{item.amharic}</span>
-                    <span className="block text-sm text-green-600">{item.name}</span>
+                    <span className="block text-sm text-amber-700">{item.name}</span>
                   </motion.a>
                 ))}
               </nav>

@@ -22,7 +22,7 @@ const Hero = () => {
       opacity: 1,
       transition: {
         duration: 0.6,
-        ease: [0.6, -0.05, 0.01, 0.99]
+        ease: "easeOut"
       }
     }
   };
@@ -34,7 +34,7 @@ const Hero = () => {
       opacity: 1,
       transition: {
         duration: 0.5,
-        ease: [0.6, -0.05, 0.01, 0.99]
+        ease: "easeOut"
       }
     },
     hover: {
@@ -42,13 +42,13 @@ const Hero = () => {
       y: -10,
       transition: {
         duration: 0.3,
-        ease: [0.6, -0.05, 0.01, 0.99]
+        ease: "easeOut"
       }
     }
   };
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-green-100 via-yellow-50 to-red-100 overflow-hidden">
+    <section className="relative min-h-screen bg-gradient-to-br from-amber-100 via-orange-50 to-red-100 overflow-hidden">
       {/* Ethiopian Flag Pattern Overlay */}
       <div className="absolute inset-0">
         <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-r from-green-200/30 to-green-300/30"></div>
@@ -73,17 +73,17 @@ const Hero = () => {
           animate="visible"
         >
           <motion.h1 
-            className="text-5xl lg:text-7xl font-serif font-bold text-green-800 mb-6 leading-tight"
+            className="text-5xl lg:text-7xl font-serif font-bold text-amber-900 mb-6 leading-tight"
             variants={itemVariants}
           >
             አዲስ
-            <span className="block text-yellow-700">Furniture</span>
-            <span className="block text-red-700 text-3xl lg:text-4xl font-medium">
+            <span className="block text-orange-800">Furniture</span>
+            <span className="block text-red-800 text-3xl lg:text-4xl font-medium">
               የኢትዮጵያ ባህላዊ የቤት እቃዎች
             </span>
           </motion.h1>
           <motion.p 
-            className="text-xl text-green-800 mb-8 leading-relaxed"
+            className="text-xl text-amber-800 mb-8 leading-relaxed"
             variants={itemVariants}
           >
             Crafting timeless pieces that honor Ethiopian heritage while transforming 
@@ -100,7 +100,7 @@ const Hero = () => {
             >
               <Button 
                 size="lg" 
-                className="bg-gradient-to-r from-green-700 to-green-800 hover:from-green-800 hover:to-green-900 text-white px-8 py-3 rounded-full transition-all duration-300 border-2 border-yellow-400"
+                className="bg-gradient-to-r from-amber-700 to-orange-700 hover:from-amber-800 hover:to-orange-800 text-white px-8 py-3 rounded-full transition-all duration-300 border-2 border-yellow-400"
               >
                 Shop Collection
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -130,29 +130,29 @@ const Hero = () => {
           <div className="grid grid-cols-2 gap-6">
             <div className="space-y-6">
               <motion.div 
-                className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg cursor-pointer border-l-4 border-green-500"
+                className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg cursor-pointer border-l-4 border-amber-500"
                 variants={cardVariants}
                 initial="hidden"
                 animate="visible"
                 whileHover="hover"
               >
-                <Sofa className="h-12 w-12 text-green-700 mb-4" />
-                <h3 className="text-lg font-semibold text-green-800 mb-2">የመኖሪያ ክፍል</h3>
-                <p className="text-green-700 text-sm mb-1">Living Room</p>
-                <p className="text-green-600 text-xs">Comfortable sofas and elegant coffee tables</p>
+                <Sofa className="h-12 w-12 text-amber-800 mb-4" />
+                <h3 className="text-lg font-semibold text-amber-900 mb-2">የመኖሪያ ክፍል</h3>
+                <p className="text-amber-800 text-sm mb-1">Living Room</p>
+                <p className="text-amber-700 text-xs">Comfortable sofas and elegant coffee tables</p>
               </motion.div>
               <motion.div 
-                className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg cursor-pointer mt-8 border-l-4 border-yellow-500"
+                className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg cursor-pointer mt-8 border-l-4 border-orange-500"
                 variants={cardVariants}
                 initial="hidden"
                 animate="visible"
                 whileHover="hover"
                 transition={{ delay: 0.2 }}
               >
-                <Bed className="h-12 w-12 text-yellow-700 mb-4" />
-                <h3 className="text-lg font-semibold text-yellow-800 mb-2">የመኝታ ክፍል</h3>
-                <p className="text-yellow-700 text-sm mb-1">Bedroom</p>
-                <p className="text-yellow-600 text-xs">Dreamy beds and storage solutions</p>
+                <Bed className="h-12 w-12 text-orange-800 mb-4" />
+                <h3 className="text-lg font-semibold text-orange-900 mb-2">የመኝታ ክፍል</h3>
+                <p className="text-orange-800 text-sm mb-1">Bedroom</p>
+                <p className="text-orange-700 text-xs">Dreamy beds and storage solutions</p>
               </motion.div>
             </div>
             <div className="space-y-6 mt-8">
@@ -164,10 +164,10 @@ const Hero = () => {
                 whileHover="hover"
                 transition={{ delay: 0.4 }}
               >
-                <Armchair className="h-12 w-12 text-red-700 mb-4" />
-                <h3 className="text-lg font-semibold text-red-800 mb-2">የምግብ ክፍል</h3>
-                <p className="text-red-700 text-sm mb-1">Dining Room</p>
-                <p className="text-red-600 text-xs">Tables and chairs for memorable meals</p>
+                <Armchair className="h-12 w-12 text-red-800 mb-4" />
+                <h3 className="text-lg font-semibold text-red-900 mb-2">የምግብ ክፍል</h3>
+                <p className="text-red-800 text-sm mb-1">Dining Room</p>
+                <p className="text-red-700 text-xs">Tables and chairs for memorable meals</p>
               </motion.div>
             </div>
           </div>

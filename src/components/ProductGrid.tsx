@@ -86,7 +86,7 @@ const ProductGrid = () => {
       opacity: 1,
       transition: {
         duration: 0.6,
-        ease: [0.6, -0.05, 0.01, 0.99]
+        ease: "easeOut"
       }
     }
   };
@@ -98,20 +98,20 @@ const ProductGrid = () => {
       opacity: 1,
       transition: {
         duration: 0.5,
-        ease: [0.6, -0.05, 0.01, 0.99]
+        ease: "easeOut"
       }
     },
     hover: {
       y: -10,
       transition: {
         duration: 0.3,
-        ease: [0.6, -0.05, 0.01, 0.99]
+        ease: "easeOut"
       }
     }
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-white via-green-50 to-yellow-50 relative overflow-hidden">
+    <section className="py-20 bg-gradient-to-br from-white via-amber-50 to-orange-50 relative overflow-hidden">
       {/* Ethiopian Pattern Background */}
       <div className="absolute inset-0 opacity-5">
         <div className="w-full h-full" style={{
@@ -128,11 +128,11 @@ const ProductGrid = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl lg:text-5xl font-serif font-bold text-green-800 mb-2">
+          <h2 className="text-4xl lg:text-5xl font-serif font-bold text-amber-900 mb-2">
             የተመረጡ ምርቶች
           </h2>
-          <p className="text-2xl lg:text-3xl text-yellow-700 mb-4">Featured Collection</p>
-          <p className="text-xl text-green-700 max-w-2xl mx-auto">
+          <p className="text-2xl lg:text-3xl text-orange-800 mb-4">Featured Collection</p>
+          <p className="text-xl text-amber-800 max-w-2xl mx-auto">
             Discover our handpicked selection of premium Ethiopian furniture pieces, 
             each crafted with traditional techniques and designed to honor our heritage.
           </p>
@@ -162,7 +162,7 @@ const ProductGrid = () => {
                     transition={{ duration: 0.5 }}
                   />
                   <div className="absolute top-4 left-4">
-                    <span className="bg-gradient-to-r from-green-500 to-yellow-500 text-white px-3 py-1 rounded-full text-xs font-medium">
+                    <span className="bg-gradient-to-r from-amber-600 to-orange-600 text-white px-3 py-1 rounded-full text-xs font-medium">
                       {product.categoryAmharic}
                     </span>
                   </div>
@@ -186,20 +186,20 @@ const ProductGrid = () => {
                 
                 <CardContent className="p-6">
                   <div className="mb-2">
-                    <span className="text-sm text-green-600 font-medium">{product.category}</span>
+                    <span className="text-sm text-amber-700 font-medium">{product.category}</span>
                   </div>
-                  <h3 className="text-lg font-semibold text-green-800 mb-1">{product.amharic}</h3>
-                  <p className="text-md text-green-700 mb-3">{product.name}</p>
+                  <h3 className="text-lg font-semibold text-amber-900 mb-1">{product.amharic}</h3>
+                  <p className="text-md text-amber-800 mb-3">{product.name}</p>
                   <div className="flex items-center justify-between">
                     <div>
-                      <span className="text-2xl font-bold text-green-800 block">{product.price}</span>
-                      <span className="text-sm text-green-600">{product.priceUSD}</span>
+                      <span className="text-2xl font-bold text-amber-900 block">{product.price}</span>
+                      <span className="text-sm text-amber-700">{product.priceUSD}</span>
                     </div>
                     <motion.div
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      <Button className="bg-gradient-to-r from-green-600 to-yellow-600 hover:from-green-700 hover:to-yellow-700 text-white rounded-full px-6 border-2 border-red-200">
+                      <Button className="bg-gradient-to-r from-amber-700 to-orange-700 hover:from-amber-800 hover:to-orange-800 text-white rounded-full px-6 border-2 border-red-200">
                         <ShoppingCart className="h-4 w-4 mr-2" />
                         <span className="hidden sm:inline">Add to Cart</span>
                         <span className="sm:hidden">Add</span>
@@ -226,7 +226,7 @@ const ProductGrid = () => {
             <Button 
               size="lg" 
               variant="outline"
-              className="border-2 border-green-700 text-green-800 hover:bg-green-700 hover:text-white px-8 py-3 rounded-full transition-all duration-300 bg-white/80 backdrop-blur-sm"
+              className="border-2 border-amber-800 text-amber-900 hover:bg-amber-800 hover:text-white px-8 py-3 rounded-full transition-all duration-300 bg-white/80 backdrop-blur-sm"
             >
               <span className="mr-2">ሁሉንም ምርቶች ይመልከቱ</span>
               <span className="text-sm">View All Products</span>
