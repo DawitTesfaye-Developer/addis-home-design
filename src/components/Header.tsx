@@ -16,16 +16,14 @@ const Header = () => {
       opacity: 0, 
       height: 0,
       transition: {
-        duration: 0.3,
-        ease: "easeOut"
+        duration: 0.3
       }
     },
     visible: { 
       opacity: 1, 
       height: "auto",
       transition: {
-        duration: 0.3,
-        ease: "easeOut"
+        duration: 0.3
       }
     }
   };
@@ -36,8 +34,7 @@ const Header = () => {
       opacity: 1, 
       x: 0,
       transition: {
-        duration: 0.3,
-        ease: "easeOut"
+        duration: 0.3
       }
     }
   };
@@ -47,7 +44,7 @@ const Header = () => {
       className="bg-white/95 backdrop-blur-sm border-b-4 border-gradient-to-r from-amber-400 via-orange-400 to-red-400 sticky top-0 z-50"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      transition={{ duration: 0.6 }}
       style={{
         borderImage: 'linear-gradient(90deg, #f59e0b, #f97316, #ef4444) 1'
       }}
@@ -72,23 +69,17 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            {[
-              { name: "Home", amharic: "ቤት" },
-              { name: "Products", amharic: "ምርቶች" },
-              { name: "About", amharic: "ስለእኛ" },
-              { name: "Contact", amharic: "ያግኙን" }
-            ].map((item, index) => (
+            {["Home", "Products", "About", "Contact"].map((item, index) => (
               <motion.a 
-                key={item.name}
-                href={`#${item.name.toLowerCase()}`} 
+                key={item}
+                href={`#${item.toLowerCase()}`} 
                 className="text-amber-900 hover:text-red-600 font-medium transition-colors relative group"
                 whileHover={{ scale: 1.1 }}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <span className="block text-sm">{item.amharic}</span>
-                <span className="block text-xs text-amber-700">{item.name}</span>
+                <span className="block text-sm">{item}</span>
                 <motion.div
                   className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-amber-600 via-orange-500 to-red-600"
                   initial={{ scaleX: 0 }}
@@ -165,15 +156,10 @@ const Header = () => {
               exit="hidden"
             >
               <nav className="py-4">
-                {[
-                  { name: "Home", amharic: "ቤት" },
-                  { name: "Products", amharic: "ምርቶች" },
-                  { name: "About", amharic: "ስለእኛ" },
-                  { name: "Contact", amharic: "ያግኙን" }
-                ].map((item, index) => (
+                {["Home", "Products", "About", "Contact"].map((item, index) => (
                   <motion.a 
-                    key={item.name}
-                    href={`#${item.name.toLowerCase()}`}
+                    key={item}
+                    href={`#${item.toLowerCase()}`}
                     className="block text-amber-900 hover:text-red-600 font-medium transition-colors py-3 px-4 border-l-4 border-transparent hover:border-orange-500"
                     variants={itemVariants}
                     initial="hidden"
@@ -182,8 +168,7 @@ const Header = () => {
                     onClick={() => setIsMenuOpen(false)}
                     whileHover={{ x: 10 }}
                   >
-                    <span className="block text-base">{item.amharic}</span>
-                    <span className="block text-sm text-amber-700">{item.name}</span>
+                    <span className="block text-base">{item}</span>
                   </motion.a>
                 ))}
               </nav>
