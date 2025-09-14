@@ -3,8 +3,31 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Heart, ShoppingCart } from "lucide-react";
 import { motion } from "framer-motion";
+import { openTelegramDirect } from "@/lib/telegram";
+import { useToast } from "@/hooks/use-toast";
 
 const ProductGrid = () => {
+  const { toast } = useToast();
+
+  const handleAddToCart = (product: typeof products[0]) => {
+    try {
+      // Send product info to Telegram group
+      openTelegramDirect(product);
+      
+      // Show success message
+      toast({
+        title: "تمت الإضافة للسلة!",
+        description: `${product.amharic} has been added to your cart. You'll be redirected to Telegram to complete your order.`,
+        duration: 5000,
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to add item to cart. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
   const products = [
     {
       id: 1,
@@ -85,8 +108,7 @@ const ProductGrid = () => {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.6,
-        ease: "easeOut"
+        duration: 0.6
       }
     }
   };
@@ -97,15 +119,13 @@ const ProductGrid = () => {
       scale: 1,
       opacity: 1,
       transition: {
-        duration: 0.5,
-        ease: "easeOut"
+        duration: 0.5
       }
     },
     hover: {
       y: -10,
       transition: {
-        duration: 0.3,
-        ease: "easeOut"
+        duration: 0.3
       }
     }
   };
@@ -199,7 +219,10 @@ const ProductGrid = () => {
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      <Button className="bg-gradient-to-r from-amber-700 to-orange-700 hover:from-amber-800 hover:to-orange-800 text-white rounded-full px-6 border-2 border-red-200">
+                      <Button 
+                        className="bg-gradient-to-r from-amber-700 to-orange-700 hover:from-amber-800 hover:to-orange-800 text-white rounded-full px-6 border-2 border-red-200"
+                        onClick={() => handleAddToCart(product)}
+                      >
                         <ShoppingCart className="h-4 w-4 mr-2" />
                         <span className="hidden sm:inline">Add to Cart</span>
                         <span className="sm:hidden">Add</span>
