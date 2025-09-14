@@ -3,9 +3,12 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Search, ShoppingCart, Heart } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useCart } from "@/contexts/CartContext";
+import CartDrawer from "./CartDrawer";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { getTotalItems } = useCart();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -92,9 +95,34 @@ const Header = () => {
 
           {/* Action Buttons */}
           <div className="flex items-center space-x-4">
-            {[Search, Heart, ShoppingCart].map((Icon, index) => (
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="text-amber-900 hover:text-red-600 hover:bg-orange-50"
+              >
+                <Search className="h-5 w-5" />
+              </Button>
+            </motion.div>
+            
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="text-amber-900 hover:text-red-600 hover:bg-orange-50"
+              >
+                <Heart className="h-5 w-5" />
+              </Button>
+            </motion.div>
+
+            <CartDrawer>
               <motion.div
-                key={index}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
@@ -103,20 +131,20 @@ const Header = () => {
                   size="sm" 
                   className="text-amber-900 hover:text-red-600 hover:bg-orange-50 relative"
                 >
-                  <Icon className="h-5 w-5" />
-                  {Icon === ShoppingCart && (
+                  <ShoppingCart className="h-5 w-5" />
+                  {getTotalItems() > 0 && (
                     <motion.span 
                       className="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
-                      transition={{ duration: 0.3, delay: 0.5 }}
+                      transition={{ duration: 0.3 }}
                     >
-                      0
+                      {getTotalItems()}
                     </motion.span>
                   )}
                 </Button>
               </motion.div>
-            ))}
+            </CartDrawer>
             
             {/* Mobile Menu Button */}
             <motion.div
