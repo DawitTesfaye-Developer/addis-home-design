@@ -3,30 +3,18 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Heart, ShoppingCart } from "lucide-react";
 import { motion } from "framer-motion";
-import { openTelegramDirect } from "@/lib/telegram";
 import { useToast } from "@/hooks/use-toast";
 
 const ProductGrid = () => {
   const { toast } = useToast();
 
   const handleAddToCart = (product: typeof products[0]) => {
-    try {
-      // Send product info to Telegram group
-      openTelegramDirect(product);
-      
-      // Show success message
-      toast({
-        title: "تمت الإضافة للسلة!",
-        description: `${product.amharic} has been added to your cart. You'll be redirected to Telegram to complete your order.`,
-        duration: 5000,
-      });
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to add item to cart. Please try again.",
-        variant: "destructive",
-      });
-    }
+    // Show success message
+    toast({
+      title: "Added to Cart!",
+      description: `${product.amharic} has been added to your cart.`,
+      duration: 3000,
+    });
   };
   const products = [
     {
