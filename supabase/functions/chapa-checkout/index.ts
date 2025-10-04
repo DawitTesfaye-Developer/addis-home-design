@@ -52,8 +52,16 @@ const handler = async (req: Request): Promise<Response> => {
     const chapaData = await chapaResponse.json();
 
     if (!chapaResponse.ok) {
-      console.error("Chapa API error:", chapaData);
-      throw new Error(chapaData.message || "Failed to initialize Chapa payment");
+      console.error("Chapa API error - Status:", chapaResponse.status);
+      console.error("Chapa API error - Response:", chapaData);
+      console.error("API Key present:", !!CHAPA_SECRET_KEY);
+      
+      // 419 typically means authorization issue
+      if (chapaResponse.status === 419) {
+        throw new Error("Invalid Chapa API key. Please verify your CHAPA_SECRET_KEY is correct.");
+      }
+      
+      throw new Error(chapaData.message || `Chapa API error: ${chapaResponse.status}`);
     }
 
     console.log("Chapa payment initialized successfully:", chapaData);
