@@ -33,14 +33,14 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ children }) => {
         body: {
           amount: totalAmount,
           currency: "ETB",
-          email: "customer@example.com", // You can add a form to collect this
+          email: "test@gmail.com", // Valid test email
           first_name: "Customer",
           last_name: "Name",
           tx_ref: txRef,
           callback_url: `${window.location.origin}/payment/callback`,
           return_url: `${window.location.origin}/payment/success`,
           customization: {
-            title: "Ethiopian Furniture Store",
+            title: "Furniture Shop", // Max 16 chars per Chapa requirement
             description: "Purchase from our collection",
           },
         },
