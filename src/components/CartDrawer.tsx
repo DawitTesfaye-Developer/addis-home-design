@@ -4,6 +4,9 @@ import { Separator } from "@/components/ui/separator";
 import { ShoppingCart, Plus, Minus, Trash2 } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { motion } from "framer-motion";
+import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 interface CartDrawerProps {
   children: React.ReactNode;
@@ -11,9 +14,59 @@ interface CartDrawerProps {
 
 const CartDrawer: React.FC<CartDrawerProps> = ({ children }) => {
   const { items, updateQuantity, removeFromCart, clearCart, getTotalPrice } = useCart();
+  const { toast } = useToast();
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const formatPrice = (price: number) => {
     return `${price.toLocaleString()} ብር`;
+  };
+
+  const handleCheckout = async () => {
+    setIsProcessing(true);
+    
+    try {
+      const totalAmount = getTotalPrice();
+      const txRef = `tx-${Date.now()}-${Math.random().toString(36).substring(7)}`;
+      
+      // Call Chapa checkout edge function
+      const { data, error } = await supabase.functions.invoke('chapa-checkout', {
+        body: {
+          amount: totalAmount,
+          currency: "ETB",
+          email: "customer@example.com", // You can add a form to collect this
+          first_name: "Customer",
+          last_name: "Name",
+          tx_ref: txRef,
+          callback_url: `${window.location.origin}/payment/callback`,
+          return_url: `${window.location.origin}/payment/success`,
+          customization: {
+            title: "Ethiopian Furniture Store",
+            description: "Purchase from our collection",
+          },
+        },
+      });
+
+      if (error) {
+        console.error("Checkout error:", error);
+        throw error;
+      }
+
+      if (data?.checkout_url) {
+        // Redirect to Chapa payment page
+        window.location.href = data.checkout_url;
+      } else {
+        throw new Error("No checkout URL received");
+      }
+    } catch (error: any) {
+      console.error("Payment initialization failed:", error);
+      toast({
+        title: "Payment Error",
+        description: error.message || "Failed to initialize payment. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   return (
@@ -104,8 +157,10 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ children }) => {
               <Button 
                 className="w-full bg-gradient-to-r from-amber-700 to-orange-700 hover:from-amber-800 hover:to-orange-800"
                 size="lg"
+                onClick={handleCheckout}
+                disabled={isProcessing}
               >
-                Proceed to Checkout
+                {isProcessing ? "Processing..." : "Proceed to Checkout"}
               </Button>
               <Button 
                 variant="outline" 
