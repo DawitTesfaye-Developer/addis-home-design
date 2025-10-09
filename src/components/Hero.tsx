@@ -46,13 +46,6 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen bg-gradient-to-br from-amber-100 via-orange-50 to-red-100 overflow-hidden">
-      {/* Ethiopian Flag Pattern Overlay */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-r from-green-200/30 to-green-300/30"></div>
-        <div className="absolute top-1/3 left-0 w-full h-1/3 bg-gradient-to-r from-yellow-200/30 to-yellow-300/30"></div>
-        <div className="absolute top-2/3 left-0 w-full h-1/3 bg-gradient-to-r from-red-200/30 to-red-300/30"></div>
-        <div className="absolute inset-0 bg-black/5"></div>
-      </div>
 
       {/* Traditional Ethiopian Pattern */}
       <div className="absolute inset-0 opacity-10">
