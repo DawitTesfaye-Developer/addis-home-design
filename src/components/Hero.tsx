@@ -2,8 +2,11 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sofa, Bed, Armchair } from "lucide-react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
+  
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -90,6 +93,7 @@ const Hero = () => {
             >
               <Button 
                 size="lg" 
+                onClick={() => navigate("/products")}
                 className="bg-gradient-to-r from-amber-700 to-orange-700 hover:from-amber-800 hover:to-orange-800 text-white px-8 py-3 rounded-full transition-all duration-300 border-2 border-yellow-400"
               >
                 Shop Collection
@@ -103,6 +107,10 @@ const Hero = () => {
               <Button 
                 variant="outline" 
                 size="lg"
+                onClick={() => {
+                  const aboutSection = document.getElementById("about");
+                  aboutSection?.scrollIntoView({ behavior: "smooth" });
+                }}
                 className="border-2 border-red-600 text-red-700 hover:bg-red-600 hover:text-white px-8 py-3 rounded-full transition-all duration-300 bg-white/80 backdrop-blur-sm"
               >
                 Learn More
@@ -125,6 +133,7 @@ const Hero = () => {
                 initial="hidden"
                 animate="visible"
                 whileHover="hover"
+                onClick={() => navigate("/products?category=Living Room")}
               >
                 <Sofa className="h-12 w-12 text-amber-800 mb-4" />
                 <h3 className="text-lg font-semibold text-amber-900 mb-2">የመኖሪያ ክፍል</h3>
@@ -138,6 +147,7 @@ const Hero = () => {
                 animate="visible"
                 whileHover="hover"
                 transition={{ delay: 0.2 }}
+                onClick={() => navigate("/products?category=Bedroom")}
               >
                 <Bed className="h-12 w-12 text-orange-800 mb-4" />
                 <h3 className="text-lg font-semibold text-orange-900 mb-2">የመኝታ ክፍል</h3>
@@ -153,6 +163,7 @@ const Hero = () => {
                 animate="visible"
                 whileHover="hover"
                 transition={{ delay: 0.4 }}
+                onClick={() => navigate("/products?category=Dining")}
               >
                 <Armchair className="h-12 w-12 text-red-800 mb-4" />
                 <h3 className="text-lg font-semibold text-red-900 mb-2">የምግብ ክፍል</h3>

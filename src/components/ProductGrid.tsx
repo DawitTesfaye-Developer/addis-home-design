@@ -5,6 +5,7 @@ import { Heart, ShoppingCart } from "lucide-react";
 import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
 import { useCart } from "@/contexts/CartContext";
+import { useNavigate } from "react-router-dom";
 import livingRoomSofa from "@/assets/living-room-sofa.jpg";
 import diningRoomTable from "@/assets/dining-room-table.jpg";
 import bedroomBed from "@/assets/bedroom-bed.jpg";
@@ -12,9 +13,14 @@ import livingRoomArmchair from "@/assets/living-room-armchair.jpg";
 import livingRoomCoffeeTable from "@/assets/living-room-coffee-table.jpg";
 import bedroomWardrobe from "@/assets/bedroom-wardrobe.jpg";
 
-const ProductGrid = () => {
+interface ProductGridProps {
+  filterCategory?: string | null;
+}
+
+const ProductGrid = ({ filterCategory }: ProductGridProps = {}) => {
   const { toast } = useToast();
   const { addToCart } = useCart();
+  const navigate = useNavigate();
 
   const handleAddToCart = (product: typeof products[0]) => {
     addToCart(product);
@@ -87,6 +93,10 @@ const ProductGrid = () => {
       categoryAmharic: "የመኝታ ክፍል"
     }
   ];
+
+  const filteredProducts = filterCategory 
+    ? products.filter(p => p.category === filterCategory)
+    : products;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -162,14 +172,17 @@ const ProductGrid = () => {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          {products.map((product, index) => (
+          {filteredProducts.map((product, index) => (
             <motion.div
               key={product.id}
               variants={cardVariants}
               whileHover="hover"
               custom={index}
             >
-              <Card className="group overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer bg-white/90 backdrop-blur-sm">
+              <Card 
+                className="group overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer bg-white/90 backdrop-blur-sm"
+                onClick={() => navigate(`/product/${product.id}`)}
+              >
                 <div className="relative overflow-hidden">
                   <motion.img 
                     src={product.image} 
@@ -192,6 +205,14 @@ const ProductGrid = () => {
                     <motion.div
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toast({
+                          title: "Added to Wishlist!",
+                          description: `${product.amharic} has been added to your wishlist.`,
+                          duration: 3000,
+                        });
+                      }}
                     >
                       <Button size="sm" variant="outline" className="bg-white/90 hover:bg-white border-0 rounded-full p-2">
                         <Heart className="h-4 w-4 text-red-600" />
@@ -218,7 +239,10 @@ const ProductGrid = () => {
                     >
                       <Button 
                         className="bg-gradient-to-r from-amber-700 to-orange-700 hover:from-amber-800 hover:to-orange-800 text-white rounded-full px-6 border-2 border-red-200"
-                        onClick={() => handleAddToCart(product)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleAddToCart(product);
+                        }}
                       >
                         <ShoppingCart className="h-4 w-4 mr-2" />
                         <span className="hidden sm:inline">Add to Cart</span>
@@ -246,6 +270,7 @@ const ProductGrid = () => {
             <Button 
               size="lg" 
               variant="outline"
+              onClick={() => navigate("/products")}
               className="border-2 border-amber-800 text-amber-900 hover:bg-amber-800 hover:text-white px-8 py-3 rounded-full transition-all duration-300 bg-white/80 backdrop-blur-sm"
             >
               <span className="mr-2">ሁሉንም ምርቶች ይመልከቱ</span>
