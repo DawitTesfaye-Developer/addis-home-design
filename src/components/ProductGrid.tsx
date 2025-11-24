@@ -5,6 +5,12 @@ import { Heart, ShoppingCart } from "lucide-react";
 import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
 import { useCart } from "@/contexts/CartContext";
+import livingRoomSofa from "@/assets/living-room-sofa.jpg";
+import diningRoomTable from "@/assets/dining-room-table.jpg";
+import bedroomBed from "@/assets/bedroom-bed.jpg";
+import livingRoomArmchair from "@/assets/living-room-armchair.jpg";
+import livingRoomCoffeeTable from "@/assets/living-room-coffee-table.jpg";
+import bedroomWardrobe from "@/assets/bedroom-wardrobe.jpg";
 
 const ProductGrid = () => {
   const { toast } = useToast();
@@ -26,7 +32,7 @@ const ProductGrid = () => {
       amharic: "ዓላማ ይፋል ዕቃ",
       price: "15,000 ብር",
       priceUSD: "$275",
-      image: "https://images.unsplash.com/photo-1721322800607-8c38375eef04?w=400&h=300&fit=crop",
+      image: livingRoomSofa,
       category: "Living Room",
       categoryAmharic: "የመኖሪያ ክፍል"
     },
@@ -36,7 +42,7 @@ const ProductGrid = () => {
       amharic: "ባህላዊ የምግብ ጠረጴዛ",
       price: "8,500 ብር",
       priceUSD: "$155",
-      image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=400&h=300&fit=crop",
+      image: diningRoomTable,
       category: "Dining",
       categoryAmharic: "የምግብ ክፍል"
     },
@@ -46,7 +52,7 @@ const ProductGrid = () => {
       amharic: "የኢትዮጵያ አልጋ ፍሬም",
       price: "12,000 ብር",
       priceUSD: "$220",
-      image: "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=400&h=300&fit=crop",
+      image: bedroomBed,
       category: "Bedroom",
       categoryAmharic: "የመኝታ ክፍል"
     },
@@ -56,7 +62,7 @@ const ProductGrid = () => {
       amharic: "ምቹ የእጅ ወንበር",
       price: "4,500 ብር",
       priceUSD: "$82",
-      image: "https://images.unsplash.com/photo-1721322800607-8c38375eef04?w=400&h=300&fit=crop",
+      image: livingRoomArmchair,
       category: "Living Room",
       categoryAmharic: "የመኖሪያ ክፍል"
     },
@@ -66,7 +72,7 @@ const ProductGrid = () => {
       amharic: "የቡና ጠረጴዛ ስብስብ",
       price: "3,200 ብር",
       priceUSD: "$58",
-      image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=400&h=300&fit=crop",
+      image: livingRoomCoffeeTable,
       category: "Living Room",
       categoryAmharic: "የመኖሪያ ክፍል"
     },
@@ -76,7 +82,7 @@ const ProductGrid = () => {
       amharic: "የእንጨት ቀሚስ ቤት",
       price: "9,800 ብር",
       priceUSD: "$179",
-      image: "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=400&h=300&fit=crop",
+      image: bedroomWardrobe,
       category: "Bedroom",
       categoryAmharic: "የመኝታ ክፍል"
     }
