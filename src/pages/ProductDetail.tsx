@@ -6,6 +6,8 @@ import { ShoppingCart, Heart, ArrowLeft } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
+import { Interactive3DViewer } from "@/components/Interactive3DViewer";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import livingRoomSofa from "@/assets/living-room-sofa.jpg";
 import diningRoomTable from "@/assets/dining-room-table.jpg";
 import bedroomBed from "@/assets/bedroom-bed.jpg";
@@ -147,11 +149,22 @@ const ProductDetail = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <img 
-                src={product.image} 
-                alt={product.name}
-                className="w-full rounded-2xl shadow-2xl"
-              />
+              <Tabs defaultValue="3d" className="w-full">
+                <TabsList className="grid w-full grid-cols-2 mb-4">
+                  <TabsTrigger value="3d">3D View</TabsTrigger>
+                  <TabsTrigger value="photo">Photo</TabsTrigger>
+                </TabsList>
+                <TabsContent value="3d">
+                  <Interactive3DViewer productName={product.name} />
+                </TabsContent>
+                <TabsContent value="photo">
+                  <img 
+                    src={product.image} 
+                    alt={product.name}
+                    className="w-full rounded-2xl shadow-2xl"
+                  />
+                </TabsContent>
+              </Tabs>
             </motion.div>
 
             <motion.div
