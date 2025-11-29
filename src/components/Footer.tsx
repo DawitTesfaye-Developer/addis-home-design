@@ -1,7 +1,24 @@
-
 import { Facebook, Instagram, Twitter, MapPin, Phone, Mail } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+  const navigate = useNavigate();
+
+  const handleCategoryClick = (category: string) => {
+    navigate(`/products?category=${category}`);
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    if (window.location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => {
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    } else {
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <footer className="bg-gradient-to-r from-amber-900 via-orange-800 to-red-900 text-white relative overflow-hidden">
       {/* Ethiopian Pattern Background */}
@@ -49,11 +66,31 @@ const Footer = () => {
             <h4 className="text-lg font-semibold text-orange-200 mb-4">ፈጣን ግንኙነቶች</h4>
             <p className="text-sm text-orange-100 mb-4">Quick Links</p>
             <ul className="space-y-2">
-              <li><a href="#" className="text-amber-200 hover:text-white transition-colors block">ቤት <span className="text-xs text-amber-300">Home</span></a></li>
-              <li><a href="#" className="text-amber-200 hover:text-white transition-colors block">የመኖሪያ ክፍል <span className="text-xs text-amber-300">Living Room</span></a></li>
-              <li><a href="#" className="text-amber-200 hover:text-white transition-colors block">የመኝታ ክፍል <span className="text-xs text-amber-300">Bedroom</span></a></li>
-              <li><a href="#" className="text-amber-200 hover:text-white transition-colors block">የምግብ ክፍል <span className="text-xs text-amber-300">Dining Room</span></a></li>
-              <li><a href="#" className="text-amber-200 hover:text-white transition-colors block">የቢሮ እቃዎች <span className="text-xs text-amber-300">Office Furniture</span></a></li>
+              <li>
+                <button onClick={() => navigate("/")} className="text-amber-200 hover:text-white transition-colors block text-left">
+                  ቤት <span className="text-xs text-amber-300">Home</span>
+                </button>
+              </li>
+              <li>
+                <button onClick={() => handleCategoryClick("Living Room")} className="text-amber-200 hover:text-white transition-colors block text-left">
+                  የመኖሪያ ክፍል <span className="text-xs text-amber-300">Living Room</span>
+                </button>
+              </li>
+              <li>
+                <button onClick={() => handleCategoryClick("Bedroom")} className="text-amber-200 hover:text-white transition-colors block text-left">
+                  የመኝታ ክፍል <span className="text-xs text-amber-300">Bedroom</span>
+                </button>
+              </li>
+              <li>
+                <button onClick={() => handleCategoryClick("Dining")} className="text-amber-200 hover:text-white transition-colors block text-left">
+                  የምግብ ክፍል <span className="text-xs text-amber-300">Dining Room</span>
+                </button>
+              </li>
+              <li>
+                <button onClick={() => navigate("/products")} className="text-amber-200 hover:text-white transition-colors block text-left">
+                  የቢሮ እቃዎች <span className="text-xs text-amber-300">Office Furniture</span>
+                </button>
+              </li>
             </ul>
           </div>
 
@@ -62,11 +99,31 @@ const Footer = () => {
             <h4 className="text-lg font-semibold text-orange-200 mb-4">አገልግሎቶች</h4>
             <p className="text-sm text-orange-100 mb-4">Services</p>
             <ul className="space-y-2">
-              <li><a href="#" className="text-amber-200 hover:text-white transition-colors block">ልዩ ዲዛይን <span className="text-xs text-amber-300">Custom Design</span></a></li>
-              <li><a href="#" className="text-amber-200 hover:text-white transition-colors block">ማስተላለፍ <span className="text-xs text-amber-300">Delivery</span></a></li>
-              <li><a href="#" className="text-amber-200 hover:text-white transition-colors block">መሰብሰብ <span className="text-xs text-amber-300">Assembly</span></a></li>
-              <li><a href="#" className="text-amber-200 hover:text-white transition-colors block">ጥገና <span className="text-xs text-amber-300">Maintenance</span></a></li>
-              <li><a href="#" className="text-amber-200 hover:text-white transition-colors block">ዋስትና <span className="text-xs text-amber-300">Warranty</span></a></li>
+              <li>
+                <button onClick={() => scrollToSection("about")} className="text-amber-200 hover:text-white transition-colors block text-left">
+                  ልዩ ዲዛይን <span className="text-xs text-amber-300">Custom Design</span>
+                </button>
+              </li>
+              <li>
+                <button onClick={() => scrollToSection("contact")} className="text-amber-200 hover:text-white transition-colors block text-left">
+                  ማስተላለፍ <span className="text-xs text-amber-300">Delivery</span>
+                </button>
+              </li>
+              <li>
+                <button onClick={() => scrollToSection("contact")} className="text-amber-200 hover:text-white transition-colors block text-left">
+                  መሰብሰብ <span className="text-xs text-amber-300">Assembly</span>
+                </button>
+              </li>
+              <li>
+                <button onClick={() => scrollToSection("contact")} className="text-amber-200 hover:text-white transition-colors block text-left">
+                  ጥገና <span className="text-xs text-amber-300">Maintenance</span>
+                </button>
+              </li>
+              <li>
+                <button onClick={() => scrollToSection("about")} className="text-amber-200 hover:text-white transition-colors block text-left">
+                  ዋስትና <span className="text-xs text-amber-300">Warranty</span>
+                </button>
+              </li>
             </ul>
           </div>
 

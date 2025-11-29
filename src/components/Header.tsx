@@ -1,17 +1,40 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Search, ShoppingCart, Heart } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/contexts/CartContext";
 import CartDrawer from "./CartDrawer";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { getTotalItems } = useCart();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleNavClick = (item: string) => {
+    const itemLower = item.toLowerCase();
+    
+    if (itemLower === "home") {
+      navigate("/");
+    } else if (itemLower === "products") {
+      navigate("/products");
+    } else if (itemLower === "about" || itemLower === "contact") {
+      // If not on home page, navigate to home first
+      if (location.pathname !== "/") {
+        navigate("/");
+        setTimeout(() => {
+          document.getElementById(itemLower)?.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      } else {
+        document.getElementById(itemLower)?.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+    setIsMenuOpen(false);
   };
 
   const menuVariants = {
@@ -56,9 +79,10 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <motion.div 
-            className="flex items-center"
+            className="flex items-center cursor-pointer"
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.3 }}
+            onClick={() => navigate("/")}
           >
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-gradient-to-br from-amber-600 via-orange-600 to-red-600 rounded-full flex items-center justify-center">
@@ -73,9 +97,9 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {["Home", "Products", "About", "Contact"].map((item, index) => (
-              <motion.a 
+              <motion.button 
                 key={item}
-                href={`#${item.toLowerCase()}`} 
+                onClick={() => handleNavClick(item)}
                 className="text-amber-900 hover:text-red-600 font-medium transition-colors relative group"
                 whileHover={{ scale: 1.1 }}
                 initial={{ opacity: 0, y: -20 }}
@@ -89,7 +113,7 @@ const Header = () => {
                   whileHover={{ scaleX: 1 }}
                   transition={{ duration: 0.3 }}
                 />
-              </motion.a>
+              </motion.button>
             ))}
           </nav>
 
@@ -185,19 +209,18 @@ const Header = () => {
             >
               <nav className="py-4">
                 {["Home", "Products", "About", "Contact"].map((item, index) => (
-                  <motion.a 
+                  <motion.button 
                     key={item}
-                    href={`#${item.toLowerCase()}`}
-                    className="block text-amber-900 hover:text-red-600 font-medium transition-colors py-3 px-4 border-l-4 border-transparent hover:border-orange-500"
+                    onClick={() => handleNavClick(item)}
+                    className="block w-full text-left text-amber-900 hover:text-red-600 font-medium transition-colors py-3 px-4 border-l-4 border-transparent hover:border-orange-500"
                     variants={itemVariants}
                     initial="hidden"
                     animate="visible"
                     transition={{ delay: index * 0.1 }}
-                    onClick={() => setIsMenuOpen(false)}
                     whileHover={{ x: 10 }}
                   >
                     <span className="block text-base">{item}</span>
-                  </motion.a>
+                  </motion.button>
                 ))}
               </nav>
             </motion.div>
