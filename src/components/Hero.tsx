@@ -2,6 +2,9 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, Shield, TrendingUp } from "lucide-react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import livingRoomSofa from "@/assets/living-room-sofa.jpg";
+import bedroomBed from "@/assets/bedroom-bed.jpg";
+import diningRoomTable from "@/assets/dining-room-table.jpg";
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -128,7 +131,7 @@ const Hero = () => {
               transition={{ duration: 0.3 }}
             >
               <img 
-                src="/placeholder.svg" 
+                src={livingRoomSofa} 
                 alt="Premium living room furniture"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
@@ -146,7 +149,7 @@ const Hero = () => {
               onClick={() => navigate("/products?category=Bedroom")}
             >
               <img 
-                src="/placeholder.svg" 
+                src={bedroomBed} 
                 alt="Bedroom furniture"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
@@ -163,7 +166,7 @@ const Hero = () => {
               onClick={() => navigate("/products?category=Dining")}
             >
               <img 
-                src="/placeholder.svg" 
+                src={diningRoomTable} 
                 alt="Dining room furniture"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
