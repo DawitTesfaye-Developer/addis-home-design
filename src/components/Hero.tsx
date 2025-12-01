@@ -1,6 +1,5 @@
-
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sofa, Bed, Armchair } from "lucide-react";
+import { ArrowRight, Sparkles, Shield, TrendingUp } from "lucide-react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
@@ -12,170 +11,177 @@ const Hero = () => {
     visible: {
       opacity: 1,
       transition: {
-        delayChildren: 0.3,
-        staggerChildren: 0.2
+        delayChildren: 0.2,
+        staggerChildren: 0.15
       }
     }
   };
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 30, opacity: 0 },
     visible: {
       y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.6
-      }
+      opacity: 1
     }
   };
 
-  const cardVariants = {
-    hidden: { scale: 0.8, opacity: 0 },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: {
-        duration: 0.5
-      }
-    },
-    hover: {
-      scale: 1.05,
-      y: -10,
-      transition: {
-        duration: 0.3
-      }
-    }
-  };
+  const features = [
+    { icon: Sparkles, text: "Handcrafted Quality" },
+    { icon: Shield, text: "Lifetime Warranty" },
+    { icon: TrendingUp, text: "Investment Pieces" }
+  ];
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-amber-100 via-orange-50 to-red-100 overflow-hidden">
-
-      {/* Traditional Ethiopian Pattern */}
-      <div className="absolute inset-0 opacity-10">
+    <section className="relative min-h-screen bg-gradient-warm overflow-hidden">
+      {/* Subtle Pattern Overlay */}
+      <div className="absolute inset-0 opacity-[0.03]">
         <div className="w-full h-full" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000000' fill-opacity='0.2'%3E%3Cpath d='M20 20c0-11.046 8.954-20 20-20v20H20zM0 20c0-11.046 8.954-20 20-20v20H0z'/%3E%3C/g%3E%3C/svg%3E")`,
-          backgroundSize: '40px 40px'
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundSize: '60px 60px'
         }}></div>
       </div>
       
-      <div className="relative z-10 container mx-auto px-4 py-20 flex flex-col lg:flex-row items-center min-h-screen">
+      <div className="relative z-10 container mx-auto px-4 py-16 lg:py-24 flex flex-col lg:flex-row items-center gap-12 min-h-screen justify-center">
         <motion.div 
-          className="lg:w-1/2 mb-12 lg:mb-0"
+          className="lg:w-1/2 max-w-2xl"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
+          {/* Badge */}
+          <motion.div 
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card shadow-soft mb-6 border border-border"
+            variants={itemVariants}
+          >
+            <span className="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+            <span className="text-sm font-medium text-foreground">Ethiopian Craftsmanship</span>
+          </motion.div>
+
           <motion.h1 
-            className="text-5xl lg:text-7xl font-serif font-bold text-amber-900 mb-6 leading-tight"
+            className="text-5xl lg:text-7xl font-serif font-bold text-foreground mb-6 leading-[1.1]"
             variants={itemVariants}
           >
-            አዲስ
-            <span className="block text-orange-800">Furniture</span>
-            <span className="block text-red-800 text-3xl lg:text-4xl font-medium">
-              የኢትዮጵያ ባህላዊ የቤት እቃዎች
-            </span>
+            Timeless Furniture
+            <span className="block text-primary mt-2">for Modern Living</span>
           </motion.h1>
+
           <motion.p 
-            className="text-xl text-amber-800 mb-8 leading-relaxed"
+            className="text-lg lg:text-xl text-muted-foreground mb-8 leading-relaxed max-w-xl"
             variants={itemVariants}
           >
-            Crafting timeless pieces that honor Ethiopian heritage while transforming 
-            your space into a home. Discover our collection of handcrafted furniture 
-            made with Ethiopian hardwood, passion, and the spirit of our ancestors.
+            Experience the perfect blend of Ethiopian heritage and contemporary design. 
+            Each piece is meticulously handcrafted from premium hardwood to transform your space.
           </motion.p>
+
+          {/* Features */}
+          <motion.div 
+            className="flex flex-wrap gap-6 mb-10"
+            variants={itemVariants}
+          >
+            {features.map((feature, index) => (
+              <div key={index} className="flex items-center gap-2">
+                <feature.icon className="h-5 w-5 text-primary" />
+                <span className="text-sm font-medium text-foreground">{feature.text}</span>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* CTA Buttons */}
           <motion.div 
             className="flex flex-col sm:flex-row gap-4"
             variants={itemVariants}
           >
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <Button 
+              size="lg" 
+              onClick={() => navigate("/products")}
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 h-12 rounded-full shadow-medium hover:shadow-large transition-all duration-300 font-medium"
             >
-              <Button 
-                size="lg" 
-                onClick={() => navigate("/products")}
-                className="bg-gradient-to-r from-amber-700 to-orange-700 hover:from-amber-800 hover:to-orange-800 text-white px-8 py-3 rounded-full transition-all duration-300 border-2 border-yellow-400"
-              >
-                Shop Collection
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              Explore Collection
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+            <Button 
+              variant="outline" 
+              size="lg"
+              onClick={() => {
+                const aboutSection = document.getElementById("about");
+                aboutSection?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="border-2 border-border hover:border-primary hover:bg-primary/5 px-8 h-12 rounded-full transition-all duration-300 font-medium"
             >
-              <Button 
-                variant="outline" 
-                size="lg"
-                onClick={() => {
-                  const aboutSection = document.getElementById("about");
-                  aboutSection?.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="border-2 border-red-600 text-red-700 hover:bg-red-600 hover:text-white px-8 py-3 rounded-full transition-all duration-300 bg-white/80 backdrop-blur-sm"
-              >
-                Learn More
-              </Button>
-            </motion.div>
+              Our Story
+            </Button>
           </motion.div>
         </motion.div>
         
+        {/* Image Grid */}
         <motion.div 
-          className="lg:w-1/2 relative"
-          initial={{ opacity: 0, x: 50 }}
+          className="lg:w-1/2 relative max-w-2xl w-full"
+          initial={{ opacity: 0, x: 60 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
+          transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
         >
-          <div className="grid grid-cols-2 gap-6">
-            <div className="space-y-6">
-              <motion.div 
-                className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg cursor-pointer border-l-4 border-amber-500"
-                variants={cardVariants}
-                initial="hidden"
-                animate="visible"
-                whileHover="hover"
-                onClick={() => navigate("/products?category=Living Room")}
-              >
-                <Sofa className="h-12 w-12 text-amber-800 mb-4" />
-                <h3 className="text-lg font-semibold text-amber-900 mb-2">የመኖሪያ ክፍል</h3>
-                <p className="text-amber-800 text-sm mb-1">Living Room</p>
-                <p className="text-amber-700 text-xs">Comfortable sofas and elegant coffee tables</p>
-              </motion.div>
-              <motion.div 
-                className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg cursor-pointer mt-8 border-l-4 border-orange-500"
-                variants={cardVariants}
-                initial="hidden"
-                animate="visible"
-                whileHover="hover"
-                transition={{ delay: 0.2 }}
-                onClick={() => navigate("/products?category=Bedroom")}
-              >
-                <Bed className="h-12 w-12 text-orange-800 mb-4" />
-                <h3 className="text-lg font-semibold text-orange-900 mb-2">የመኝታ ክፍል</h3>
-                <p className="text-orange-800 text-sm mb-1">Bedroom</p>
-                <p className="text-orange-700 text-xs">Dreamy beds and storage solutions</p>
-              </motion.div>
-            </div>
-            <div className="space-y-6 mt-8">
-              <motion.div 
-                className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg cursor-pointer border-l-4 border-red-500"
-                variants={cardVariants}
-                initial="hidden"
-                animate="visible"
-                whileHover="hover"
-                transition={{ delay: 0.4 }}
-                onClick={() => navigate("/products?category=Dining")}
-              >
-                <Armchair className="h-12 w-12 text-red-800 mb-4" />
-                <h3 className="text-lg font-semibold text-red-900 mb-2">የምግብ ክፍል</h3>
-                <p className="text-red-800 text-sm mb-1">Dining Room</p>
-                <p className="text-red-700 text-xs">Tables and chairs for memorable meals</p>
-              </motion.div>
-            </div>
+          <div className="grid grid-cols-2 gap-4 lg:gap-6">
+            {/* Main large image */}
+            <motion.div 
+              className="col-span-2 relative aspect-[16/10] rounded-2xl overflow-hidden shadow-large group"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+            >
+              <img 
+                src="/placeholder.svg" 
+                alt="Premium living room furniture"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-foreground/0 to-foreground/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute bottom-4 left-4 right-4 text-primary-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <p className="font-serif text-xl font-semibold">Living Room Collection</p>
+              </div>
+            </motion.div>
+
+            {/* Two smaller images */}
+            <motion.div 
+              className="relative aspect-square rounded-2xl overflow-hidden shadow-medium group cursor-pointer"
+              whileHover={{ scale: 1.05, y: -5 }}
+              transition={{ duration: 0.3 }}
+              onClick={() => navigate("/products?category=Bedroom")}
+            >
+              <img 
+                src="/placeholder.svg" 
+                alt="Bedroom furniture"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 to-foreground/0"></div>
+              <div className="absolute bottom-3 left-3 text-primary-foreground">
+                <p className="font-medium text-sm">Bedroom</p>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              className="relative aspect-square rounded-2xl overflow-hidden shadow-medium group cursor-pointer"
+              whileHover={{ scale: 1.05, y: -5 }}
+              transition={{ duration: 0.3 }}
+              onClick={() => navigate("/products?category=Dining")}
+            >
+              <img 
+                src="/placeholder.svg" 
+                alt="Dining room furniture"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 to-foreground/0"></div>
+              <div className="absolute bottom-3 left-3 text-primary-foreground">
+                <p className="font-medium text-sm">Dining Room</p>
+              </div>
+            </motion.div>
           </div>
+
+          {/* Decorative elements */}
+          <div className="absolute -top-6 -right-6 w-32 h-32 bg-accent/20 rounded-full blur-3xl"></div>
+          <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-primary/10 rounded-full blur-3xl"></div>
         </motion.div>
       </div>
       
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent"></div>
+      {/* Bottom gradient fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent"></div>
     </section>
   );
 };

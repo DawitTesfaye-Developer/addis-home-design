@@ -8,51 +8,66 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Ethiopian-inspired professional palette */
+    --background: 40 20% 97%;
+    --foreground: 25 40% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 25 40% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 25 40% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Rich terracotta/brown as primary */
+    --primary: 18 60% 45%;
+    --primary-foreground: 40 20% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Warm sand/beige secondary */
+    --secondary: 38 45% 88%;
+    --secondary-foreground: 25 40% 20%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted warm tones */
+    --muted: 40 30% 92%;
+    --muted-foreground: 25 20% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Golden accent */
+    --accent: 42 85% 55%;
+    --accent-foreground: 25 40% 15%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 40 20% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 40 20% 85%;
+    --input: 40 20% 90%;
+    --ring: 18 60% 45%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --sidebar-background: 0 0% 98%;
+    /* Ethiopian warm tones */
+    --ethiopian-rust: 14 70% 50%;
+    --ethiopian-gold: 42 85% 55%;
+    --ethiopian-earth: 25 50% 30%;
+    --ethiopian-sand: 38 45% 88%;
+    
+    /* Gradients */
+    --gradient-warm: linear-gradient(135deg, hsl(38 60% 92%) 0%, hsl(28 50% 88%) 50%, hsl(18 45% 85%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(18 60% 45%) 0%, hsl(14 70% 50%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(42 85% 55%) 0%, hsl(38 80% 60%) 100%);
+    
+    /* Shadows */
+    --shadow-soft: 0 2px 8px -2px hsl(25 40% 15% / 0.08);
+    --shadow-medium: 0 4px 16px -4px hsl(25 40% 15% / 0.12);
+    --shadow-large: 0 12px 32px -8px hsl(25 40% 15% / 0.18);
+    --shadow-glow: 0 0 24px hsl(42 85% 55% / 0.25);
 
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 40 20% 97%;
+    --sidebar-foreground: 25 40% 20%;
+    --sidebar-primary: 18 60% 45%;
+    --sidebar-primary-foreground: 40 20% 98%;
+    --sidebar-accent: 38 45% 88%;
+    --sidebar-accent-foreground: 25 40% 20%;
+    --sidebar-border: 40 20% 85%;
+    --sidebar-ring: 18 60% 45%;
   }
 
   .dark {
