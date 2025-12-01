@@ -1,5 +1,7 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import FeaturedProducts from "@/components/FeaturedProducts";
+import Testimonials from "@/components/Testimonials";
 import ProductGrid from "@/components/ProductGrid";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
@@ -15,6 +17,12 @@ const Index = () => {
       <main>
         <section id="home">
           <Hero />
+        </section>
+        <section id="featured">
+          <FeaturedProducts />
+        </section>
+        <section id="testimonials">
+          <Testimonials />
         </section>
         <section id="products">
           <ProductGrid />
