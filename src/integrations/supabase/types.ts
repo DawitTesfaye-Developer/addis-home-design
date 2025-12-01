@@ -14,7 +14,78 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      products: {
+        Row: {
+          category: string
+          created_at: string
+          description: string | null
+          id: string
+          image_url: string
+          is_featured: boolean | null
+          name: string
+          price: number
+          stock_quantity: number | null
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url: string
+          is_featured?: boolean | null
+          name: string
+          price: number
+          stock_quantity?: number | null
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string
+          is_featured?: boolean | null
+          name?: string
+          price?: number
+          stock_quantity?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      testimonials: {
+        Row: {
+          avatar_url: string | null
+          comment: string
+          created_at: string
+          customer_name: string
+          customer_role: string | null
+          id: string
+          is_featured: boolean | null
+          rating: number
+        }
+        Insert: {
+          avatar_url?: string | null
+          comment: string
+          created_at?: string
+          customer_name: string
+          customer_role?: string | null
+          id?: string
+          is_featured?: boolean | null
+          rating: number
+        }
+        Update: {
+          avatar_url?: string | null
+          comment?: string
+          created_at?: string
+          customer_name?: string
+          customer_role?: string | null
+          id?: string
+          is_featured?: boolean | null
+          rating?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
