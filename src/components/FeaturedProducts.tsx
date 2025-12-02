@@ -6,6 +6,7 @@ import { ChevronLeft, ChevronRight, ShoppingCart } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "@/contexts/CartContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { toast } from "sonner";
 import livingRoomSofa from "@/assets/living-room-sofa.jpg";
 import livingRoomArmchair from "@/assets/living-room-armchair.jpg";
@@ -39,6 +40,7 @@ const FeaturedProducts = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const { addToCart } = useCart();
+  const { language, t } = useLanguage();
 
   useEffect(() => {
     const fetchFeaturedProducts = async () => {
@@ -110,14 +112,10 @@ const FeaturedProducts = () => {
           className="text-center mb-12"
         >
           <h2 className="text-4xl lg:text-5xl font-serif font-bold text-foreground mb-2">
-            Featured Collection
+            {t("Featured Collection", "ተመራጭ ስብስብ")}
           </h2>
-          <p className="text-xl text-primary/80 font-medium mb-4">ተመራጭ ስብስብ</p>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Discover our handpicked selection of premium furniture pieces
-          </p>
-          <p className="text-base text-muted-foreground max-w-2xl mx-auto mt-1">
-            የምርጥ የቤት ዕቃ ምርጫዎቻችንን ያግኙ
+            {t("Discover our handpicked selection of premium furniture pieces", "የምርጥ የቤት ዕቃ ምርጫዎቻችንን ያግኙ")}
           </p>
         </motion.div>
 
@@ -188,12 +186,12 @@ const FeaturedProducts = () => {
                           onClick={(e) => {
                             e.stopPropagation();
                             handleAddToCart(product);
-                            toast.success(`${product.name} ወደ ጋሪ ታክሏል / Added to cart`);
+                            toast.success(t(`${product.name} added to cart`, `${product.name} ወደ ጋሪ ታክሏል`));
                           }}
                           className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full"
                         >
                           <ShoppingCart className="h-4 w-4 mr-2" />
-                          Add / ጨምር
+                          {t("Add", "ጨምር")}
                         </Button>
                       </div>
                     </div>
@@ -217,7 +215,7 @@ const FeaturedProducts = () => {
             onClick={() => navigate("/products")}
             className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground rounded-full px-8"
           >
-            View All Products / ሁሉንም ምርቶች ይመልከቱ
+            {t("View All Products", "ሁሉንም ምርቶች ይመልከቱ")}
           </Button>
         </motion.div>
       </div>
