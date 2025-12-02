@@ -67,11 +67,15 @@ const Testimonials = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl lg:text-5xl font-serif font-bold text-foreground mb-4">
+          <h2 className="text-4xl lg:text-5xl font-serif font-bold text-foreground mb-2">
             What Our Customers Say
           </h2>
+          <p className="text-xl text-primary/80 font-medium mb-4">ደንበኞቻችን ምን ይላሉ</p>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Real experiences from real customers who transformed their spaces
+          </p>
+          <p className="text-base text-muted-foreground max-w-2xl mx-auto mt-1">
+            ቦታዎቻቸውን ከቀየሩ እውነተኛ ደንበኞች የተገኙ እውነተኛ ተሞክሮዎች
           </p>
         </motion.div>
 
