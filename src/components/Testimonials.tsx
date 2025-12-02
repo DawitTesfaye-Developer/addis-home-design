@@ -3,6 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card } from "@/components/ui/card";
 import { Star, Quote } from "lucide-react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Testimonial {
   id: string;
@@ -16,6 +17,7 @@ interface Testimonial {
 const Testimonials = () => {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [loading, setLoading] = useState(true);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const fetchTestimonials = async () => {
@@ -68,14 +70,10 @@ const Testimonials = () => {
           className="text-center mb-12"
         >
           <h2 className="text-4xl lg:text-5xl font-serif font-bold text-foreground mb-2">
-            What Our Customers Say
+            {t("What Our Customers Say", "ደንበኞቻችን ምን ይላሉ")}
           </h2>
-          <p className="text-xl text-primary/80 font-medium mb-4">ደንበኞቻችን ምን ይላሉ</p>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Real experiences from real customers who transformed their spaces
-          </p>
-          <p className="text-base text-muted-foreground max-w-2xl mx-auto mt-1">
-            ቦታዎቻቸውን ከቀየሩ እውነተኛ ደንበኞች የተገኙ እውነተኛ ተሞክሮዎች
+            {t("Real experiences from real customers who transformed their spaces", "ቦታዎቻቸውን ከቀየሩ እውነተኛ ደንበኞች የተገኙ እውነተኛ ተሞክሮዎች")}
           </p>
         </motion.div>
 

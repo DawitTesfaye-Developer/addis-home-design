@@ -4,6 +4,7 @@ import { Menu, X, Search, ShoppingCart, Heart } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/contexts/CartContext";
 import CartDrawer from "./CartDrawer";
+import LanguageToggle from "./LanguageToggle";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const Header = () => {
@@ -119,6 +120,8 @@ const Header = () => {
 
           {/* Action Buttons */}
           <div className="flex items-center space-x-4">
+            <LanguageToggle />
+            
             <motion.div
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
