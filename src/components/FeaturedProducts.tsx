@@ -79,7 +79,6 @@ const FeaturedProducts = () => {
       category: product.category,
       categoryAmharic: product.category,
     });
-    toast.success(`${product.name} added to cart`);
   };
 
   if (loading) {
@@ -110,11 +109,15 @@ const FeaturedProducts = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl lg:text-5xl font-serif font-bold text-foreground mb-4">
+          <h2 className="text-4xl lg:text-5xl font-serif font-bold text-foreground mb-2">
             Featured Collection
           </h2>
+          <p className="text-xl text-primary/80 font-medium mb-4">ተመራጭ ስብስብ</p>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Discover our handpicked selection of premium furniture pieces
+          </p>
+          <p className="text-base text-muted-foreground max-w-2xl mx-auto mt-1">
+            የምርጥ የቤት ዕቃ ምርጫዎቻችንን ያግኙ
           </p>
         </motion.div>
 
@@ -185,11 +188,12 @@ const FeaturedProducts = () => {
                           onClick={(e) => {
                             e.stopPropagation();
                             handleAddToCart(product);
+                            toast.success(`${product.name} ወደ ጋሪ ታክሏል / Added to cart`);
                           }}
                           className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full"
                         >
                           <ShoppingCart className="h-4 w-4 mr-2" />
-                          Add to Cart
+                          Add / ጨምር
                         </Button>
                       </div>
                     </div>
@@ -213,7 +217,7 @@ const FeaturedProducts = () => {
             onClick={() => navigate("/products")}
             className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground rounded-full px-8"
           >
-            View All Products
+            View All Products / ሁሉንም ምርቶች ይመልከቱ
           </Button>
         </motion.div>
       </div>
