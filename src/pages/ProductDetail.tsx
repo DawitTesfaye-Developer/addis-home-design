@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { useParams, useNavigate } from "react-router-dom";
 import { ShoppingCart, Heart, ArrowLeft } from "lucide-react";
-import { useCart } from "@/contexts/CartContext";
+import { useCart } from "@/contexts/useCart";
 import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
 import { Interactive3DViewer } from "@/components/Interactive3DViewer";

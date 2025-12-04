@@ -2,7 +2,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { ShoppingCart, Plus, Minus, Trash2 } from "lucide-react";
-import { useCart } from "@/contexts/CartContext";
+import { useCart } from "@/contexts/useCart";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { getFunctions } from "firebase/functions";
@@ -52,9 +52,9 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ children }) => {
         },
       });
 
-      if (result.data && (result.data as any).checkout_url) {
+      if (result.data && (result.data as ChapaCheckoutResult).checkout_url) {
         // Redirect to Chapa payment page
-        window.location.href = (result.data as any).checkout_url;
+        window.location.href = (result.data as ChapaCheckoutResult).checkout_url;
       } else {
         throw new Error("No checkout URL received");
       }

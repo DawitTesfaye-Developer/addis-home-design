@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Linkedin, Send, MapPin, Phone, Mail } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Send, MapPin, Phone, Mail, Twitter, LucideTwitter } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -41,7 +41,7 @@ const Footer = () => {
   };
 
   return (
-    <motion.footer 
+    <motion.footer
       className="bg-gradient-to-r from-amber-900 via-orange-800 to-red-900 text-white relative overflow-hidden"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
@@ -57,7 +57,7 @@ const Footer = () => {
       </div>
 
       <div className="container mx-auto px-4 py-16 relative z-10">
-        <motion.div 
+        <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
           variants={containerVariants}
           initial="hidden"
@@ -66,7 +66,7 @@ const Footer = () => {
         >
           {/* Company Info */}
           <motion.div variants={itemVariants}>
-            <motion.div 
+            <motion.div
               className="flex items-center space-x-2 mb-4"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
@@ -82,7 +82,7 @@ const Footer = () => {
               የኢትዮጵያ ባህላዊ የቤት እቃዎች
             </p>
             <p className="text-amber-100 mb-4 text-sm">
-              Crafting beautiful, quality furniture for Ethiopian homes since 1998. 
+              Crafting beautiful, quality furniture for Ethiopian homes since 1998.
               Your comfort, style, and our heritage are our top priorities.
             </p>
             <div className="flex space-x-4">
@@ -93,7 +93,7 @@ const Footer = () => {
                 <Instagram className="h-5 w-5" />
               </a>
               <a href="#" className="text-orange-300 hover:text-white transition-colors">
-                <Twitter className="h-5 w-5" />
+                <LucideTwitter className="h-5 w-5" />
               </a>
             </div>
           </motion.div>
@@ -110,13 +110,13 @@ const Footer = () => {
                 { label: "የምግብ ክፍል", en: "Dining Room", action: () => handleCategoryClick("Dining") },
                 { label: "የቢሮ እቃዎች", en: "Office Furniture", action: () => navigate("/products") },
               ].map((item, index) => (
-                <motion.li 
+                <motion.li
                   key={index}
                   whileHover={{ x: 5 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <button 
-                    onClick={item.action} 
+                  <button
+                    onClick={item.action}
                     className="text-amber-200 hover:text-white transition-colors block text-left"
                   >
                     {item.label} <span className="text-xs text-amber-300">{item.en}</span>
@@ -138,13 +138,13 @@ const Footer = () => {
                 { label: "ጥገና", en: "Maintenance", section: "contact" },
                 { label: "ዋስትና", en: "Warranty", section: "about" },
               ].map((item, index) => (
-                <motion.li 
+                <motion.li
                   key={index}
                   whileHover={{ x: 5 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <button 
-                    onClick={() => scrollToSection(item.section)} 
+                  <button
+                    onClick={() => scrollToSection(item.section)}
                     className="text-amber-200 hover:text-white transition-colors block text-left"
                   >
                     {item.label} <span className="text-xs text-amber-300">{item.en}</span>
@@ -162,13 +162,16 @@ const Footer = () => {
               <div className="flex items-start space-x-3">
                 <MapPin className="h-5 w-5 text-orange-300 mt-1" />
                 <div>
-                  <span className="text-amber-200 block">ቦሌ መንገድ፣ አዲስ አበባ</span>
-                  <span className="text-amber-300 text-sm">Bole Road, Addis Ababa, Ethiopia</span>
+                  <span className="text-amber-200 block">አቃቂ ቃሊቲ 09 ፣ አዲስ አበባ</span>
+                  <span className="text-amber-300 text-sm">Akaki kality 09, Addis Ababa, Ethiopia</span>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
-                <Phone className="h-5 w-5 text-orange-300" />
-                <span className="text-amber-200">+251 11 123 4567</span>
+                <a href="tel:+251928384499" className="flex items-center space-x-3 hover:opacity-80 transition">
+                  <Phone className="h-5 w-5 text-orange-300 cursor-pointer" />
+                  <span className="text-amber-200 cursor-pointer">+251 92 838 4499</span>
+                </a>
+
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-orange-300" />
@@ -178,7 +181,7 @@ const Footer = () => {
           </motion.div>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="border-t border-amber-700 mt-12 pt-8 text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

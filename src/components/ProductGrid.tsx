@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Heart, ShoppingCart } from "lucide-react";
 import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
-import { useCart } from "@/contexts/CartContext";
+import { useCart } from "@/contexts/useCart";
 import { useNavigate } from "react-router-dom";
 import livingRoomSofa from "@/assets/living-room-sofa.jpg";
 import diningRoomTable from "@/assets/dining-room-table.jpg";

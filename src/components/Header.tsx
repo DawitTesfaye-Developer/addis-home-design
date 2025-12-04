@@ -2,11 +2,11 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Search, ShoppingCart, Heart, Languages } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useCart } from "@/contexts/CartContext";
+import { useCart } from "@/contexts/useCart";
 import CartDrawer from "./CartDrawer";
 import LanguageToggle from "./LanguageToggle";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useLanguage } from "@/contexts/useLanguage";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -181,7 +181,7 @@ const Header = () => {
             </CartDrawer>
 
             {/* Language Toggle */}
-            <motion.div
+            {/* <motion.div
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
@@ -197,7 +197,7 @@ const Header = () => {
                   {language === 'en' ? 'አማ' : 'EN'}
                 </span>
               </Button>
-            </motion.div>
+            </motion.div> */}
 
             {/* Mobile Menu Button */}
             <motion.div

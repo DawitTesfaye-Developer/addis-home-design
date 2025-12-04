@@ -14,7 +14,7 @@ type ChapaRequest = {
   tx_ref?: string;
   callback_url?: string;
   return_url?: string;
-  customization?: Record<string, any>;
+  customization?: Record<string, unknown>;
 };
 export const chapaCheckout = functions.https.onCall(async (request: functions.https.CallableRequest<ChapaRequest>) => {
   try {

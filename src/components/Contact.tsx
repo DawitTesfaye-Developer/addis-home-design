@@ -3,7 +3,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, Phone, Mail, Clock, CheckCircle, XCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
-// @ts-ignore - EmailJS package may not be installed yet
 import emailjs from '@emailjs/browser';
 
 const Contact = () => {
@@ -160,40 +159,29 @@ const Contact = () => {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          {contactInfo.map((info, index) => {
-            const CardWrapper = info.href ? 'a' : 'div';
-            const wrapperProps = info.href ? {
-              href: info.href,
-              target: info.href.startsWith('http') ? '_blank' : undefined,
-              rel: info.href.startsWith('http') ? 'noopener noreferrer' : undefined
-            } : {};
-
-            return (
-              <motion.div
-                key={index}
-                variants={cardVariants}
-                whileHover="hover"
-              >
-                <CardWrapper {...wrapperProps} className="block">
-                  <Card className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all duration-300 cursor-pointer h-full">
-                    <CardContent className="p-6 text-center">
-                      <motion.div
-                        className="bg-gradient-to-r from-amber-200 via-orange-200 to-red-200 text-amber-900 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
-                        whileHover={{ rotate: 360 }}
-                        transition={{ duration: 0.6 }}
-                      >
-                        <info.icon className="h-8 w-8" />
-                      </motion.div>
-                      <h3 className="text-lg font-semibold mb-1 text-orange-200">{info.amharic}</h3>
-                      <h4 className="text-sm font-medium mb-2 text-white">{info.title}</h4>
-                      <p className="text-amber-100 font-medium mb-1">{info.details}</p>
-                      <p className="text-sm text-amber-200">{info.subtitle}</p>
-                    </CardContent>
-                  </Card>
-                </CardWrapper>
-              </motion.div>
-            );
-          })}
+          {contactInfo.map((info, index) => (
+            <motion.div
+              key={index}
+              variants={cardVariants}
+              whileHover="hover"
+            >
+              <Card className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all duration-300 cursor-pointer">
+                <CardContent className="p-6 text-center">
+                  <motion.div 
+                    className="bg-gradient-to-r from-amber-200 via-orange-200 to-red-200 text-amber-900 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+                    whileHover={{ rotate: 360 }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <info.icon className="h-8 w-8" />
+                  </motion.div>
+                  <h3 className="text-lg font-semibold mb-1 text-orange-200">{info.amharic}</h3>
+                  <h4 className="text-sm font-medium mb-2 text-white">{info.title}</h4>
+                  <p className="text-amber-100 font-medium mb-1">{info.details}</p>
+                  <p className="text-sm text-amber-200">{info.subtitle}</p>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
         </motion.div>
 
         <motion.div
