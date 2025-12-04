@@ -5,8 +5,14 @@ import { ShoppingCart, Plus, Minus, Trash2 } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { getFunctions } from "firebase/functions";
+import { httpsCallable } from "firebase/functions";
+import { app } from "@/firebase";
 import { useToast } from "@/hooks/use-toast";
+
+interface ChapaCheckoutResult {
+  checkout_url: string;
+}
 
 interface CartDrawerProps {
   children: React.ReactNode;
@@ -23,45 +29,41 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ children }) => {
 
   const handleCheckout = async () => {
     setIsProcessing(true);
-    
+
     try {
       const totalAmount = getTotalPrice();
       const txRef = `tx-${Date.now()}-${Math.random().toString(36).substring(7)}`;
-      
-      // Call Chapa checkout edge function
-      const { data, error } = await supabase.functions.invoke('chapa-checkout', {
-        body: {
-          amount: totalAmount,
-          currency: "ETB",
-          email: "test@gmail.com", // Valid test email
-          first_name: "Customer",
-          last_name: "Name",
-          tx_ref: txRef,
-          callback_url: `${window.location.origin}/payment/callback`,
-          return_url: `${window.location.origin}/payment/success`,
-          customization: {
-            title: "Furniture Shop", // Max 16 chars per Chapa requirement
-            description: "Purchase from our collection",
-          },
+
+      // Call Chapa checkout Firebase function
+      const functions = getFunctions(app);
+      const chapaCheckout = httpsCallable(functions, 'chapaCheckout');
+      const result = await chapaCheckout({
+        amount: totalAmount,
+        currency: "ETB",
+        email: "test@gmail.com", // Valid test email
+        first_name: "Customer",
+        last_name: "Name",
+        tx_ref: txRef,
+        callback_url: `${window.location.origin}/payment/callback`,
+        return_url: `${window.location.origin}/payment/success`,
+        customization: {
+          title: "Furniture Shop", // Max 16 chars per Chapa requirement
+          description: "Purchase from our collection",
         },
       });
 
-      if (error) {
-        console.error("Checkout error:", error);
-        throw error;
-      }
-
-      if (data?.checkout_url) {
+      if (result.data && (result.data as any).checkout_url) {
         // Redirect to Chapa payment page
-        window.location.href = data.checkout_url;
+        window.location.href = (result.data as any).checkout_url;
       } else {
         throw new Error("No checkout URL received");
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Payment initialization failed:", error);
+      const errorMessage = error instanceof Error ? error.message : "Failed to initialize payment. Please try again.";
       toast({
         title: "Payment Error",
-        description: error.message || "Failed to initialize payment. Please try again.",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Button } from './ui/button';
 import { RotateCcw, Play, Pause } from 'lucide-react';
 import * as THREE from 'three';
+import { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
 
 // 3D Sofa Model
 const Sofa3D = () => {
@@ -205,7 +206,7 @@ interface Interactive3DViewerProps {
 
 export const Interactive3DViewer = ({ productName }: Interactive3DViewerProps) => {
   const [autoRotate, setAutoRotate] = useState(true);
-  const [controlsRef, setControlsRef] = useState<any>(null);
+  const [controlsRef, setControlsRef] = useState<OrbitControlsImpl | null>(null);
 
   const getModelByName = (name: string) => {
     const nameLower = name.toLowerCase();

@@ -1,29 +1,77 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
-type Language = "en" | "am" | "both";
+type Language = 'en' | 'am';
 
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: (en: string, am: string) => string;
+  t: (key: string) => string;
 }
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+const LanguageContext = createContext<LanguageContextType>({
+  language: 'en',
+  setLanguage: () => {},
+  t: (key: string) => key,
+});
 
-export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<Language>("both");
+export const useLanguage = (): LanguageContextType => {
+  return useContext(LanguageContext);
+};
 
-  const t = (en: string, am: string): string => {
-    switch (language) {
-      case "en":
-        return en;
-      case "am":
-        return am;
-      case "both":
-        return `${en} / ${am}`;
-      default:
-        return en;
+const translations = {
+  en: {
+    home: 'Home',
+    products: 'Products',
+    about: 'About',
+    contact: 'Contact',
+    featuredCollection: 'Featured Collection',
+    discoverHandpicked: 'Discover our handpicked selection of premium furniture pieces',
+    viewAllProducts: 'View All Products',
+    whatOurCustomersSay: 'What Our Customers Say',
+    realExperiences: 'Real experiences from real customers who transformed their spaces',
+    loadingFeatured: 'Loading featured products...',
+    loadingTestimonials: 'Loading testimonials...',
+    addToCart: 'Add to Cart',
+    livingRoom: 'Living Room',
+    dining: 'Dining',
+    bedroom: 'Bedroom',
+  },
+  am: {
+    home: 'ቤት',
+    products: 'ምርቶች',
+    about: 'ስለ እኛ',
+    contact: 'እንገናኛለን',
+    featuredCollection: 'የተለየ ስብስብ',
+    discoverHandpicked: 'የተለየ የቤት እቃዎች ምርጫችንን ያውቁ',
+    viewAllProducts: 'ሁሉንም ምርቶች ይመልከቱ',
+    whatOurCustomersSay: 'ደንበኞቻችን ምን ይላሉ',
+    realExperiences: 'ቦታዎቻቸውን ከቀየሩ እውነተኛ ደንበኞች የተገኙ እውነተኛ ተሞክሮዎች',
+    loadingFeatured: 'የተለየ ምርቶች በመስቀል ላይ...',
+    loadingTestimonials: 'ተሞክሮዎች በመስቀል ላይ...',
+    addToCart: 'ወደ ገበያ ቦታ ያስገቡ',
+    livingRoom: 'የሆነ ቦታ',
+    dining: 'ምግብ ቤት',
+    bedroom: 'ክፍል ቦታ',
+  },
+};
+
+export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [language, setLanguageState] = useState<Language>('en');
+
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem('language') as Language;
+    if (savedLanguage && (savedLanguage === 'en' || savedLanguage === 'am')) {
+      setLanguageState(savedLanguage);
     }
+  }, []);
+
+  const setLanguage = (lang: Language) => {
+    setLanguageState(lang);
+    localStorage.setItem('language', lang);
+  };
+
+  const t = (key: string): string => {
+    return translations[language][key as keyof typeof translations.en] || key;
   };
 
   return (
@@ -31,12 +79,4 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
       {children}
     </LanguageContext.Provider>
   );
-};
-
-export const useLanguage = () => {
-  const context = useContext(LanguageContext);
-  if (!context) {
-    throw new Error("useLanguage must be used within a LanguageProvider");
-  }
-  return context;
 };

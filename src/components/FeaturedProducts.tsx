@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { db } from ".././firebase";
+import { collection, query, where, orderBy, getDocs, doc } from "firebase/firestore";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, ShoppingCart } from "lucide-react";
@@ -34,27 +35,65 @@ const imageMap: Record<string, string> = {
   '/src/assets/dining-room-table.jpg': diningRoomTable,
 };
 
+const staticProducts: Product[] = [
+  {
+    id: "1",
+    name: "Elegant Sofa Set",
+    description: "A comfortable and stylish sofa set perfect for modern living rooms.",
+    price: 15000,
+    category: "Living Room",
+    image_url: "/src/assets/living-room-sofa.jpg",
+    stock_quantity: 5,
+  },
+  {
+    id: "2",
+    name: "Traditional Dining Table",
+    description: "A beautifully crafted dining table with traditional Ethiopian design.",
+    price: 8500,
+    category: "Dining",
+    image_url: "/src/assets/dining-room-table.jpg",
+    stock_quantity: 3,
+  },
+  {
+    id: "3",
+    name: "Ethiopian Bed Frame",
+    description: "A sturdy and elegant bed frame with cultural motifs.",
+    price: 12000,
+    category: "Bedroom",
+    image_url: "/src/assets/bedroom-bed.jpg",
+    stock_quantity: 4,
+  },
+];
+
 const FeaturedProducts = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const { addToCart } = useCart();
-  const { language, t } = useLanguage();
+  const { t } = useLanguage();
 
   useEffect(() => {
     const fetchFeaturedProducts = async () => {
-      const { data, error } = await supabase
-        .from("products")
-        .select("*")
-        .eq("is_featured", true)
-        .order("created_at", { ascending: false });
-
-      if (error) {
+      try {
+        const productsRef = collection(db, "products");
+        const q = query(productsRef, where("is_featured", "==", true), orderBy("created_at", "desc"));
+        const querySnapshot = await getDocs(q);
+        const productsData = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        })) as Product[];
+        if (productsData.length > 0) {
+          setProducts(productsData);
+        } else {
+          // Use static products if no Firebase data
+          setProducts(staticProducts);
+        }
+      } catch (error) {
         console.error("Error fetching products:", error);
         toast.error("Failed to load featured products");
-      } else {
-        setProducts(data || []);
+        // Use static products on error
+        setProducts(staticProducts);
       }
       setLoading(false);
     };
@@ -88,7 +127,7 @@ const FeaturedProducts = () => {
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-center min-h-[400px]">
-            <div className="animate-pulse text-muted-foreground">Loading featured products...</div>
+            <div className="animate-pulse text-muted-foreground">{t('loadingFeatured')}</div>
           </div>
         </div>
       </section>
@@ -112,10 +151,10 @@ const FeaturedProducts = () => {
           className="text-center mb-12"
         >
           <h2 className="text-4xl lg:text-5xl font-serif font-bold text-foreground mb-2">
-            {t("Featured Collection", "ተመራጭ ስብስብ")}
+            {t("Featured Collection / ተመራጭ ስብስብ")}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            {t("Discover our handpicked selection of premium furniture pieces", "የምርጥ የቤት ዕቃ ምርጫዎቻችንን ያግኙ")}
+            {t("Discover our handpicked selection of premium furniture pieces / የምርጥ የቤት ዕቃ ምርጫዎቻችንን ያግኙ")}
           </p>
         </motion.div>
 
@@ -191,7 +230,7 @@ const FeaturedProducts = () => {
                           className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full"
                         >
                           <ShoppingCart className="h-4 w-4 mr-2" />
-                          {t("Add", "ጨምር")}
+                          {t('addToCart')}
                         </Button>
                       </div>
                     </div>
@@ -215,7 +254,7 @@ const FeaturedProducts = () => {
             onClick={() => navigate("/products")}
             className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground rounded-full px-8"
           >
-            {t("View All Products", "ሁሉንም ምርቶች ይመልከቱ")}
+            {t('viewAllProducts')}
           </Button>
         </motion.div>
       </div>

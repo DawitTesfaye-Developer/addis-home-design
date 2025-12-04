@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Twitter, MapPin, Phone, Mail } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Send, MapPin, Phone, Mail } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -86,17 +86,15 @@ const Footer = () => {
               Your comfort, style, and our heritage are our top priorities.
             </p>
             <div className="flex space-x-4">
-              {[Facebook, Instagram, Twitter].map((Icon, index) => (
-                <motion.a 
-                  key={index}
-                  href="#" 
-                  className="text-orange-300 hover:text-white transition-colors"
-                  whileHover={{ scale: 1.2, rotate: 5 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <Icon className="h-5 w-5" />
-                </motion.a>
-              ))}
+              <a href="#" className="text-orange-300 hover:text-white transition-colors">
+                <Facebook className="h-5 w-5" />
+              </a>
+              <a href="#" className="text-orange-300 hover:text-white transition-colors">
+                <Instagram className="h-5 w-5" />
+              </a>
+              <a href="#" className="text-orange-300 hover:text-white transition-colors">
+                <Twitter className="h-5 w-5" />
+              </a>
             </div>
           </motion.div>
 
@@ -161,41 +159,21 @@ const Footer = () => {
             <h4 className="text-lg font-semibold text-orange-200 mb-4">ያግኙን</h4>
             <p className="text-sm text-orange-100 mb-4">Contact Us</p>
             <div className="space-y-3">
-              {[
-                { 
-                  icon: MapPin, 
-                  am: "ቦሌ መንገድ፣ አዲስ አበባ", 
-                  en: "Bole Road, Addis Ababa, Ethiopia" 
-                },
-                { 
-                  icon: Phone, 
-                  am: "+251 11 123 4567", 
-                  en: null 
-                },
-                { 
-                  icon: Mail, 
-                  am: "info@addisfurniture.com", 
-                  en: null 
-                },
-              ].map((item, index) => (
-                <motion.div 
-                  key={index}
-                  className="flex items-start space-x-3"
-                  whileHover={{ x: 5 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <motion.div
-                    whileHover={{ rotate: 15 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <item.icon className="h-5 w-5 text-orange-300 mt-1" />
-                  </motion.div>
-                  <div>
-                    <span className="text-amber-200 block">{item.am}</span>
-                    {item.en && <span className="text-amber-300 text-sm">{item.en}</span>}
-                  </div>
-                </motion.div>
-              ))}
+              <div className="flex items-start space-x-3">
+                <MapPin className="h-5 w-5 text-orange-300 mt-1" />
+                <div>
+                  <span className="text-amber-200 block">ቦሌ መንገድ፣ አዲስ አበባ</span>
+                  <span className="text-amber-300 text-sm">Bole Road, Addis Ababa, Ethiopia</span>
+                </div>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Phone className="h-5 w-5 text-orange-300" />
+                <span className="text-amber-200">+251 11 123 4567</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Mail className="h-5 w-5 text-orange-300" />
+                <span className="text-amber-200">info@addisfurniture.com</span>
+              </div>
             </div>
           </motion.div>
         </motion.div>
@@ -208,7 +186,7 @@ const Footer = () => {
           transition={{ duration: 0.5, delay: 0.3 }}
         >
           <p className="text-amber-200">
-            © 2024 አዲስ Furniture. All rights reserved. | በኢትዮጵያ ፍቅር የተሠራ ❤️ Made with ❤️ in Ethiopia
+            © 2024 አዲስ Furniture. All rights reserved. | Made with 💕🙌 God's will
           </p>
         </motion.div>
       </div>

@@ -17,7 +17,7 @@ interface ProductGridProps {
   filterCategory?: string | null;
 }
 
-const ProductGrid = ({ filterCategory }: ProductGridProps = {}) => {
+const ProductGrid = ({ filterCategory }: ProductGridProps) => {
   const { toast } = useToast();
   const { addToCart } = useCart();
   const navigate = useNavigate();

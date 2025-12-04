@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { Card } from "@/components/ui/card";
+import { db } from "../../firebase.js";
+import { collection, query, where, orderBy, limit, getDocs } from "firebase/firestore";
+import { Card } from "../ui/card";
 import { Star, Quote } from "lucide-react";
 import { motion } from "framer-motion";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 interface Testimonial {
   id: string;
@@ -12,6 +13,8 @@ interface Testimonial {
   rating: number;
   comment: string;
   avatar_url: string | null;
+  is_featured?: boolean;
+  created_at?: string;
 }
 
 const Testimonials = () => {
@@ -21,19 +24,116 @@ const Testimonials = () => {
 
   useEffect(() => {
     const fetchTestimonials = async () => {
-      const { data, error } = await supabase
-        .from("testimonials")
-        .select("*")
-        .eq("is_featured", true)
-        .order("created_at", { ascending: false })
-        .limit(4);
+      try {
+        console.log("Fetching testimonials...");
+        const testimonialsRef = collection(db, "testimonials");
+        let q = query(
+          testimonialsRef,
+          where("is_featured", "==", true),
+          orderBy("created_at", "desc"),
+          limit(4)
+        );
+        let querySnapshot = await getDocs(q);
+        console.log("Featured testimonials query snapshot:", querySnapshot);
+        let data = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        })) as Testimonial[];
 
-      if (error) {
+        // If no featured testimonials, fetch recent ones
+        if (data.length === 0) {
+          console.log("No featured testimonials, fetching recent ones...");
+          q = query(
+            testimonialsRef,
+            orderBy("created_at", "desc"),
+            limit(4)
+          );
+          querySnapshot = await getDocs(q);
+          data = querySnapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+          })) as Testimonial[];
+        }
+
+        console.log("Fetched testimonials:", data);
+
+        // If still no testimonials, use mock data for development
+        if (data.length === 0) {
+          console.log("Using mock testimonials for development");
+          data = [
+            {
+              id: "mock1",
+              customer_name: "Sarah Johnson",
+              comment: "የቤት ዕቃዎቹ የኢትዮጵያ ባህል እና ዘመናዊ ዲዛይን በሚያምር ሁኔታ ያዋህዳሉ። ለፕሮጀክቶቼ ተስማሚ ናቸው!",
+              rating: 5,
+              customer_role: "Home Owner",
+              avatar_url: null,
+              is_featured: true,
+              created_at: new Date().toISOString()
+            },
+            {
+              id: "mock2",
+              customer_name: "Michael Chen",
+              comment: "ለደንበኞቼ ሁልጊዜ ይህን ኩባንያ እመክራለሁ። ጥራቱ፣ አገልግሎቱ እና ዋጋው በጣም ጥሩ ነው። የመኝታ ቤት ስብስቡ በተለይ አስደናቂ ነው!",
+              rating: 5,
+              customer_role: "Interior Designer",
+              avatar_url: null,
+              is_featured: true,
+              created_at: new Date().toISOString()
+            },
+            {
+              id: "mock3",
+              customer_name: "Emma Davis",
+              comment: "ለቢሮዬ የገዛሁት የመመገቢያ ጠረጴዛ እና ወንበሮች በጣም ዘመናዊ እና ጠንካራ ናቸው። የአገልግሎት ሰጪዎቹም በጣም ትሁት እና ረዳት ናቸው።",
+              rating: 4,
+              customer_role: "Architect",
+              avatar_url: null,
+              is_featured: true,
+              created_at: new Date().toISOString()
+            },
+            {
+              id: "mock4",
+              customer_name: "David Wilson",
+              comment: "የደረሰኝ የቤት ዕቃ ጥራት በጣም አስደናቂ ነው። የሶፋው ምቾት እና ዲዛይን ከጠበቅኩት በላይ ነው። ለቤተሰቤ ትክክለኛው ምርጫ ነበር!",
+              rating: 5,
+              customer_role: "Business Owner",
+              avatar_url: null,
+              is_featured: true,
+              created_at: new Date().toISOString()
+            }
+          ];
+        }
+
+        setTestimonials(data);
+        setLoading(false);
+      } catch (error) {
         console.error("Error fetching testimonials:", error);
-      } else {
-        setTestimonials(data || []);
+        // Fallback to mock data on error
+        const mockData = [
+          {
+            id: "mock1",
+            customer_name: "Sarah Johnson",
+            comment: "Absolutely love the quality and design of the furniture. The delivery was smooth and the customer service was excellent!",
+            rating: 5,
+            customer_role: "Home Owner",
+            avatar_url: null,
+            is_featured: true,
+            created_at: new Date().toISOString()
+          },
+          {
+            id: "mock2",
+            customer_name: "Michael Chen",
+            comment: "The sofa we purchased exceeded our expectations. Comfortable, stylish, and built to last. Highly recommend!",
+            rating: 5,
+            customer_role: "Interior Designer",
+            avatar_url: null,
+            is_featured: true,
+            created_at: new Date().toISOString()
+          }
+        ];
+        setTestimonials(mockData);
+        setLoading(false);
       }
-      setLoading(false);
     };
 
     fetchTestimonials();
@@ -69,11 +169,11 @@ const Testimonials = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl lg:text-5xl font-serif font-bold text-foreground mb-2">
-            {t("What Our Customers Say", "ደንበኞቻችን ምን ይላሉ")}
+          <h2 className="text-4xl lg:text-5xl font-serif font-bold text-foreground mb-4">
+            {t("whatOurCustomersSay")}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            {t("Real experiences from real customers who transformed their spaces", "ቦታዎቻቸውን ከቀየሩ እውነተኛ ደንበኞች የተገኙ እውነተኛ ተሞክሮዎች")}
+            Real experiences from real customers who transformed their spaces
           </p>
         </motion.div>
 
@@ -97,11 +197,10 @@ const Testimonials = () => {
                   {[...Array(5)].map((_, i) => (
                     <Star
                       key={i}
-                      className={`h-5 w-5 ${
-                        i < testimonial.rating
+                      className={`h-5 w-5 ${i < testimonial.rating
                           ? "fill-accent text-accent"
                           : "fill-muted text-muted"
-                      }`}
+                        }`}
                     />
                   ))}
                 </div>

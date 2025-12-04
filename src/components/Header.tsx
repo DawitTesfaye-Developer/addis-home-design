@@ -1,17 +1,19 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Search, ShoppingCart, Heart } from "lucide-react";
+import { Menu, X, Search, ShoppingCart, Heart, Languages } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/contexts/CartContext";
 import CartDrawer from "./CartDrawer";
 import LanguageToggle from "./LanguageToggle";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { getTotalItems } = useCart();
   const navigate = useNavigate();
   const location = useLocation();
+  const { language, setLanguage, t } = useLanguage();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -97,17 +99,22 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            {["Home", "Products", "About", "Contact"].map((item, index) => (
-              <motion.button 
-                key={item}
-                onClick={() => handleNavClick(item)}
+            {[
+              { key: "home", label: "Home" },
+              { key: "products", label: "Products" },
+              { key: "about", label: "About" },
+              { key: "contact", label: "Contact" }
+            ].map((item, index) => (
+              <motion.button
+                key={item.key}
+                onClick={() => handleNavClick(item.label)}
                 className="text-amber-900 hover:text-red-600 font-medium transition-colors relative group"
                 whileHover={{ scale: 1.1 }}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <span className="block text-sm">{item}</span>
+                <span className="block text-sm">{t(item.key)}</span>
                 <motion.div
                   className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-amber-600 via-orange-500 to-red-600"
                   initial={{ scaleX: 0 }}
@@ -172,7 +179,26 @@ const Header = () => {
                 </Button>
               </motion.div>
             </CartDrawer>
-            
+
+            {/* Language Toggle */}
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setLanguage(language === 'en' ? 'am' : 'en')}
+                className="text-amber-900 hover:text-red-600 hover:bg-orange-50"
+                title={`Switch to ${language === 'en' ? 'Amharic' : 'English'}`}
+              >
+                <Languages className="h-5 w-5" />
+                <span className="ml-1 text-xs font-medium">
+                  {language === 'en' ? 'አማ' : 'EN'}
+                </span>
+              </Button>
+            </motion.div>
+
             {/* Mobile Menu Button */}
             <motion.div
               whileHover={{ scale: 1.1 }}
@@ -211,10 +237,15 @@ const Header = () => {
               exit="hidden"
             >
               <nav className="py-4">
-                {["Home", "Products", "About", "Contact"].map((item, index) => (
-                  <motion.button 
-                    key={item}
-                    onClick={() => handleNavClick(item)}
+                {[
+                  { key: "home", label: "Home" },
+                  { key: "products", label: "Products" },
+                  { key: "about", label: "About" },
+                  { key: "contact", label: "Contact" }
+                ].map((item, index) => (
+                  <motion.button
+                    key={item.key}
+                    onClick={() => handleNavClick(item.label)}
                     className="block w-full text-left text-amber-900 hover:text-red-600 font-medium transition-colors py-3 px-4 border-l-4 border-transparent hover:border-orange-500"
                     variants={itemVariants}
                     initial="hidden"
@@ -222,7 +253,7 @@ const Header = () => {
                     transition={{ delay: index * 0.1 }}
                     whileHover={{ x: 10 }}
                   >
-                    <span className="block text-base">{item}</span>
+                    <span className="block text-base">{t(item.key)}</span>
                   </motion.button>
                 ))}
               </nav>
