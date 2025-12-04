@@ -7,10 +7,12 @@ import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import { FloatingFurniture3D } from "@/components/FloatingFurniture3D";
+import AnimatedBackground from "@/components/AnimatedBackground";
 
 const Index = () => {
   return (
     <div className="min-h-screen relative">
+      <AnimatedBackground />
       <FloatingFurniture3D />
       <div className="relative z-10">
         <Header />
