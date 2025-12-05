@@ -225,7 +225,7 @@ const FeaturedProducts = () => {
                           onClick={(e) => {
                             e.stopPropagation();
                             handleAddToCart(product);
-                            toast.success(t(`${product.name} added to cart`, `${product.name} ወደ ጋሪ ታክሏል`));
+                            toast.success(`${product.name} added to cart`);
                           }}
                           className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full"
                         >
