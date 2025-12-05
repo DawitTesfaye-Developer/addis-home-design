@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { db } from "../../firebase.js";
+import { db } from "../firebase.js";
 import { collection, query, where, orderBy, limit, getDocs } from "firebase/firestore";
-import { Card } from "../ui/card";
+import { Card } from "./ui/card.js";
 import { Star, Quote } from "lucide-react";
 import { motion } from "framer-motion";
-import { useLanguage } from "../../contexts/LanguageContext";
+import { useLanguage } from "../contexts/useLanguage.js";
 
 interface Testimonial {
   id: string;
