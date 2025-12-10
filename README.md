@@ -55,7 +55,7 @@ This project is built with:
 
 ## How can I deploy this project?
 
-Simply open [live ](addis-furniture.vercel.app) and click on Share -> Publish.
+Simply open addis-furniture.vercel.app and click on Share -> Publish.
 
 Yes, you can!
 
